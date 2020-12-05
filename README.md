@@ -5,6 +5,7 @@
 </em></p>
 
 [![GitHub saintmalik](https://img.shields.io/github/followers/saintmalik?label=follow%20github&style=flat-square)](https://github.com/saintmalik)
+[![Twitter: saintmalik_](https://img.shields.io/twitter/follow/saintmalik_?style=flat-square)](https://twitter.com/saintmalik_)
 
 <br>
 
