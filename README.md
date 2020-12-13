@@ -1,4 +1,4 @@
-<h4 align="center">I'm a Computer Science Student:woozy_face:, Frontend Dev <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30">  Pentester:monocle_face:, an aspiring SOC Analyst and Open-source contributor:shushing_face:.I have a kin interest for hacking:supervillain: especially offensive... Yeah! So i do Bug Bounties.</h4>
+<h4 align="center">I'm a CS Undergrad:woozy_face:, Frontend Dev <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30">,  Pentester:monocle_face:, an aspiring SOC Analyst and Open-source contributor:shushing_face:.I have a kin interest for hacking:supervillain: especially offensive... Yeah! So i do Bug Bounties:v:.</h4>
 <p align="center"><img
 src="https://img.shields.io/github/followers/saintmalik?style=social" alt="saintmalik" /> <img
 src="https://img.shields.io/github/last-commit/saintmalik/SaintMalik" alt="saintmalik" /> <img
