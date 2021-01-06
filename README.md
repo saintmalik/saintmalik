@@ -4,3 +4,11 @@ src="https://img.shields.io/github/followers/saintmalik?style=social" alt="saint
 src="https://img.shields.io/github/last-commit/saintmalik/SaintMalik" alt="saintmalik" /> </p>
 
 <p align="center" height='130px'> <img src="https://github-readme-stats.vercel.app/api?username=saintmalik&show_icons=true&hide_title=true&include_all_commits=true&line_height=21&count_private=true&theme=radical" alt="saintmalik"/> </p>
+
+
+<p align="center">
+  <a>
+   <img height="180" width="160" src="https://github.com/akshitagupta15june/akshitagupta15june/blob/master/meditation.gif">
+   <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=akshitagupta15june&theme=dark&hide_border=true"/>
+   <img height="180" width="160" src="https://github.com/akshitagupta15june/akshitagupta15june/blob/master/dance.gif">
+</p>
