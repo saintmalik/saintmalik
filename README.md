@@ -9,6 +9,6 @@ src="https://img.shields.io/github/last-commit/saintmalik/SaintMalik" alt="saint
 <p align="center">
   <a>
    <img height="180" width="160" src="https://github.com/akshitagupta15june/akshitagupta15june/blob/master/meditation.gif">
-   <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=akshitagupta15june&theme=dark&hide_border=true"/>
+   <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=saintmalik&theme=dark&hide_border=true"/>
    <img height="180" width="160" src="https://github.com/akshitagupta15june/akshitagupta15june/blob/master/dance.gif">
 </p>
