@@ -3,5 +3,4 @@
 src="https://img.shields.io/github/followers/saintmalik?style=social" alt="saintmalik" /> <img
 src="https://img.shields.io/github/last-commit/saintmalik/SaintMalik" alt="saintmalik" /> </p>
 
-<p align="center" height='130px'> <img src="https://github-readme-stats.vercel.app/api?username=saintmalik&show_icons=true&hide_title=true&include_all_commits=true&line_height=21&count_private=true&theme=radical" alt="saintmalik"/> 
-<img src="https://github-readme-stats.vercel.app/api?username=saintmalik&show_icons=true" alt="SaintMalik Github Stats"></img></p>
+<p align="center" height='130px'> <img src="https://github-readme-stats.vercel.app/api?username=saintmalik&show_icons=true&hide_title=true&include_all_commits=true&line_height=21&count_private=true&theme=radical" alt="saintmalik"/> </p>
