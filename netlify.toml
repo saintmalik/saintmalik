@@ -1,0 +1,17 @@
+[[redirects]]
+from = "/posts/"
+to = "https://blog.saintmalik.me"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://saintmalik.me/posts"
+to = "https://blog.saintmalik.me"
+status = 301
+force = true
+
+[[redirects]]
+from = "/blog/"
+to = "https://blog.saintmalik.me"
+status = 301
+force = true
