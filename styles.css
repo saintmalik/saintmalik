@@ -144,19 +144,6 @@ a:link,a:visited {
     text-decoration-color: #666
 }
 
-
-ul,ol {
-    padding-left: 30px
-}
-
-blockquote {
-    font-weight: 300;
-    margin: 2rem 0;
-    padding-left: 2rem;
-    padding-right: 1rem;
-    border-left: 2px dotted #ddd
-}
-
 hr {
     border: 0;
     border-top: 1px dashed #888;
@@ -174,7 +161,7 @@ td,th {
     vertical-align: text-top
 }
 
-img,iframe {
+img {
     width: 100%
 }
 
@@ -182,15 +169,10 @@ img {
     border-radius: 5px
 }
 
-h1,h2,h3,h4,h5 {
+h2,h3 {
     margin: 0.2rem 0 0.05rem;
     font-weight: 600;
     line-height: 1.2
-}
-
-h1 {
-    font-weight: 700;
-    font-size: 2.488rem
 }
 
 h2 {
@@ -199,14 +181,6 @@ h2 {
 
 h3 {
     font-size: 1.728rem
-}
-
-h4 {
-    font-size: 1.44rem
-}
-
-h5 {
-    font-size: 1.2rem
 }
 
 @media(min-width: 42rem) {
@@ -219,24 +193,12 @@ h5 {
         font-size: 100%
     }
 
-    h1 {
-        font-size: 3.052rem
-    }
-
     h2 {
         font-size: 2.441rem
     }
 
     h3 {
         font-size: 1.953rem
-    }
-
-    h4 {
-        font-size: 1.563rem
-    }
-
-    h5 {
-        font-size: 1.25rem
     }
 }
 
@@ -249,23 +211,6 @@ h5 {
     a:link,a:visited {
         color: #0f9d58;
         text-decoration-color: #bbb
-    }
-
-    header a:link,header a:visited {
-        text-decoration-line: none;
-        color: #fff
-    }
-
-    blockquote {
-        border-left: 2px dotted #444
-    }
-
-    #frontpage a {
-        color: #fff
-    }
-
-    #frontpage em {
-        color: #bbb
     }
 }
 
