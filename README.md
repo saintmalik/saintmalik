@@ -8,6 +8,8 @@ devsecops 🏗️, clis/web apis with golang 🖥️, pentesting 🛠️ and jan
 
 currently working with golang and improving my secops/appsec skill sets ⚡️
 
+![Malik GitHub stats](https://github-readme-stats.vercel.app/api/wakatime?username=saintmalik&theme=codeSTACKr&show_icons=true&layout=compact)
+
 <!-- ### Technologies
 
 ![Linux](https://img.shields.io/badge/-Linux-000?&logo=Linux)
