@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Abdulmalik Salawu">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="dark light">
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+        <link rel="canonical" href="https://saintmalik.me">
+        <link rel="icon" sizes="16x16" href="assets/favicon-16x16.png">
+        <link rel="icon" sizes="32x32" href="assets/favicon-32x32.png">
+        <link rel="icon" sizes="192x192" href="assets/android-chrome-192x192.png">
+        <link rel="icon" sizes="512x512" href="assets/android-chrome-512x512.png">
+        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+        <link
+            rel="preload"
+            href="assets/ConfigRounded-Regular.woff2"
+            as="font"
+            type="font/woff2"
+        >
+        <link
+            rel="preload"
+            href="assets/ConfigRounded-Bold.woff2"
+            as="font"
+            type="font/woff2"
+        >
+        <link
+            rel="preload"
+            href="assets/ConfigRounded-Italic.woff2"
+            as="font"
+            type="font/woff2"
+        >
+        <link
+            rel="preload"
+            href="assets/ConfigRounded-Light.woff2"
+            as="font"
+            type="font/woff2"
+        >
+        <link
+            rel="preload"
+            href="assets/ConfigRounded-LightItalic.woff2"
+            as="font"
+            type="font/woff2"
+        >
+        <link
+            rel="preload"
+            href="assets/ConfigRounded-SemiBold.woff2"
+            as="font"
+            type="font/woff2"
+        >
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="google-site-verification" content=" ">
+        <title>Abdulmalik</title>
+        <style>
+        :root {
+            --background-color: #fff;
+            --text-color: #000;
+            --link-color: #007bff;
+            --border-color: #ddd;
+            --table-header-bg: #f8f9fa;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #00040d;
+                --text-color: #f8f9fa;
+                --link-color: #66b2ff;
+                --border-color: #444;
+                --table-header-bg: #333;
+            }
+        }
+        body {
+            font-family: 'ConfigRounded-Regular', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header, section, footer {
+            padding: 0px 0;
+        }
+        .circle-image {
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            /* text-align: center; */
+            line-height: 1.2;
+            /* margin: 0.2rem 0 0.05rem;
+    font-weight: 600; */
+    /* line-height: 1.2 */
+        }
+        p, a {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .projects-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .projects-table th, .projects-table td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+        .projects-table th {
+            background-color: var(--table-header-bg);
+        }
+        .projects-table a {
+            color: var(--link-color);
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .projects-table {
+                width: 100%;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            .projects-table th, .projects-table td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .projects-table th {
+                background-color: var(--background-color);
+                border: none;
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <img
+                    src="assets/apple-touch-icon.png"
+                    alt="Abdulmalik's Profile Picture"
+                    class="circle-image"
+                    width="150"
+                >
+                <h3>Hi! I'm Abdulmalik, a security professional</h3>
+            </header>
+            <section>
+                <p>I <a href="https://blog.saintmalik.me/" target="_blank">create</a> content on learning, ideas, my experiences, and technical topics.
+                </p>
+                <p>I am primarily focused on Application Security, DevSecOps, and DevOps.</p>
+                <p>In the past, I have responsibly disclosed security vulnerabilities to several companies, including OpenClassroom, Andela, and Kuda.</p>
+                <p>I have experience working with various technologies such as SAST tools like Semgrep, CI/CD pipelines, Docker, Kubernetes, Amazon EKS, Golang, Bash scripting, Burp Suite, Terraform, HashiCorp Vault, and more.</p>
+                <p>I am an open source contributor and advocate. I have contributed to several open source projects in the past and hope to further contribute to security-focused open source initiatives moving forward.</p>
+                <p>To contact me, send an email via <a href="mailto:abdulmalik@saintmalik.me" target="_blank">email</a>, connect on <a href="https://linkedin.com/in/saintmalik" target="_blank">LinkedIn</a>, or follow me on <a href="https://twitter.com/saintmalik_" target="_blank">Twitter</a>.
+                </p>
+            </section>
+            <hr class="thin">
+            <section>
+                <h3 id="projects">
+                    Recent Projects
+                </h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;"></th>
+                            <th style="text-align: left;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left;">
+                                <a href="https://cloudwatch.saintmalik.me" target="_blank">CloudWatchDog</a>
+                            </td>
+                            <td style="text-align: left;">
+                              Gain greater visibility, control, and optimization over your AWS cloud infrastructure.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">
+                                <a href="https://sendwish.saintmalik.me" target="_blank">SendWish</a>
+                            </td>
+                            <td style="text-align: left;">
+                                an uncomplicated kinsfolk, comradeship wishes service.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">
+                                <a href="https://delta.saintmalik.me" target="_blank">Delta</a>
+                            </td>
+                            <td style="text-align: left;">
+                                Break free from Helm chart release update chaos - your path to effortless management.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">
+                                <a href="https://wame.saintmalik.me" target="_blank">wame.io</a>
+                            </td>
+                            <td style="text-align: left;">
+                                send many whatsapp number messages without saving the contacts
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">
+                                <a href="https://github.com/saintmalik/awesome-oss-docs" target="_blank">Awesome OSS Docs</a>
+                            </td>
+                            <td style="text-align: left;">
+                                directory of all open source documentation
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">
+                                <a href="https://dca.saintmalik.me" target="_blank">dcatool</a>
+                            </td>
+                            <td style="text-align: left;">
+                                A CLI for Dollar Cost Averaging on crypto via Binance
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">
+                                <a href="https://cointime.saintmalik.me" target="_blank">What If I Had Invested</a>
+                            </td>
+                            <td style="text-align: left;">
+                                coin time machine a coin calculator that helps crypto investors
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <footer>
+                <a href="https://bit.ly/AbdulmalikSalawuResume" target="_blank"><h3><i class="fas fa-link"></i> Resume</h3></a>
+            </footer>
+        </div>
+    </body>
+</html>

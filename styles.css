@@ -1,0 +1,223 @@
+@font-face {
+    font-family: config rounded;
+    src: url(ConfigRounded-Regular.eot);
+    src: local("Config Rounded Regular"),local("ConfigRounded-Regular"),url(ConfigRounded-Regular.eot?#iefix) format("embedded-opentype"),url(assets/ConfigRounded-Regular.woff2) format("woff2"),url(ConfigRounded-Regular.woff) format("woff"),url(ConfigRounded-Regular.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: config rounded;
+    src: url(ConfigRounded-Bold.eot);
+    src: local("Config Rounded Bold"),local("ConfigRounded-Bold"),url(ConfigRounded-Bold.eot?#iefix) format("embedded-opentype"),url(assets/ConfigRounded-Bold.woff2) format("woff2"),url(ConfigRounded-Bold.woff) format("woff"),url(ConfigRounded-Bold.ttf) format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: config rounded;
+    src: url(ConfigRounded-Italic.eot);
+    src: local("Config Rounded Italic"),local("ConfigRounded-Italic"),url(ConfigRounded-Italic.eot?#iefix) format("embedded-opentype"),url(assets/ConfigRounded-Italic.woff2) format("woff2"),url(ConfigRounded-Italic.woff) format("woff"),url(ConfigRounded-Italic.ttf) format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: config rounded;
+    src: url(ConfigRounded-BoldItalic.eot);
+    src: local("Config Rounded Bold Italic"),local("ConfigRounded-BoldItalic"),url(ConfigRounded-BoldItalic.eot?#iefix) format("embedded-opentype"),url(assets/ConfigRounded-BoldItalic.woff2) format("woff2"),url(ConfigRounded-BoldItalic.woff) format("woff"),url(ConfigRounded-BoldItalic.ttf) format("truetype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: config rounded;
+    src: url(ConfigRounded-Light.eot);
+    src: local("Config Rounded Light"),local("ConfigRounded-Light"),url(ConfigRounded-Light.eot?#iefix) format("embedded-opentype"),url(assets/ConfigRounded-Light.woff2) format("woff2"),url(ConfigRounded-Light.woff) format("woff"),url(ConfigRounded-Light.ttf) format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: config;
+    src: url(Config-LightItalic.eot);
+    src: local("Config Light Italic"),local("Config-LightItalic"),url(Config-LightItalic.eot?#iefix) format("embedded-opentype"),url(assets/Config-LightItalic.woff2) format("woff2"),url(Config-LightItalic.woff) format("woff"),url(Config-LightItalic.ttf) format("truetype");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: config rounded;
+    src: url(ConfigRounded-LightItalic.eot);
+    src: local("Config Rounded Light Italic"),local("ConfigRounded-LightItalic"),url(ConfigRounded-LightItalic.eot?#iefix) format("embedded-opentype"),url(assets/ConfigRounded-LightItalic.woff2) format("woff2"),url(ConfigRounded-LightItalic.woff) format("woff"),url(ConfigRounded-LightItalic.ttf) format("truetype");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: config rounded;
+    src: url(ConfigRounded-SemiBold.eot);
+    src: local("Config Rounded SemiBold"),local("ConfigRounded-SemiBold"),url(ConfigRounded-SemiBold.eot?#iefix) format("embedded-opentype"),url(assets/ConfigRounded-SemiBold.woff2) format("woff2"),url(ConfigRounded-SemiBold.woff) format("woff"),url(ConfigRounded-SemiBold.ttf) format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+:root {
+    font-family: config rounded,-apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif
+}
+
+@supports(font-variation-settings: normal) {
+    :root {
+        -webkit-font-feature-settings:"tnum" off,"calt" on,"liga" on,"dlig" on,"frac" off,"case" on,"zero" off;
+        -moz-font-feature-settings: "tnum" off,"calt" on,"liga" on,"dlig" on,"frac" off,"case" on,"zero" off;
+        -ms-font-feature-settings: "tnum" off,"calt" on,"liga" on,"dlig" on,"frac" off,"case" on,"zero" off;
+        font-feature-settings: "tnum" off,"calt" on,"liga" on,"dlig" on,"frac" off,"case" on,"zero" off
+    }
+}
+
+body {
+    font-weight: 400;
+    box-sizing: border-box;
+    line-height: 1.75;
+    margin: 0;
+    /* padding: 2rem !important; */
+    max-width: 1200px
+}
+
+@media (min-width: 1200px){
+    .container {
+        max-width: 400px;
+      }
+      body {
+        padding-left: 10rem !important;
+        padding-right: 10rem !important;
+      }
+    }
+
+@media (min-width: 992px){
+.container {
+    max-width: 400px;
+    }
+    body {
+        padding-left: 10rem !important;
+        padding-right: 10rem !important;
+  }
+}
+
+@media (min-width: 768px){
+    .container {
+        max-width: 400px;
+        }
+    }
+
+.circle-image {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* This ensures the image fills the circle without distortion */
+    }
+
+div.container {
+    font-family: 'Monaco', monospace;
+    font-size: 16;
+    white-space: pre-line;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+
+p {
+    margin-bottom: 0rem;
+    hyphens: auto;
+    -webkit-hyphens: auto
+}
+
+a:link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .14rem;
+    text-decoration-style: dotted
+}
+
+a:link,a:visited {
+    color: #444;
+    text-decoration-color: #666
+}
+
+hr {
+    border: 0;
+    border-top: 1px dashed #888;
+    padding: 0;
+    margin: 1rem 0 1rem
+}
+
+table {
+    margin: 0rem 0
+}
+
+td,th {
+    padding: 0 .5rem;
+    line-height: 1.5;
+    vertical-align: text-top
+}
+
+img {
+    width: 100%
+}
+
+img {
+    border-radius: 5px
+}
+
+h2,h3 {
+    margin: 0.2rem 0 0.05rem;
+    font-weight: 600;
+    line-height: 1.2
+}
+
+h2 {
+    font-size: 2.074rem
+}
+
+h3 {
+    font-size: 1.728rem
+}
+
+@media(min-width: 42rem) {
+    p {
+        hyphens:manual;
+        -webkit-hyphens: manual
+    }
+
+    html {
+        font-size: 100%
+    }
+
+    h2 {
+        font-size: 2.441rem
+    }
+
+    h3 {
+        font-size: 1.953rem
+    }
+}
+
+@media(prefers-color-scheme: dark) {
+    html,body {
+        background:#00040d;
+        color: #fff
+    }
+
+    a:link,a:visited {
+        color: #0f9d58;
+        text-decoration-color: #bbb
+    }
+}
