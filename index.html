@@ -1,281 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="author" content="Abdulmalik Salawu">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="color-scheme" content="dark light">
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-        <meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
-        <link rel="canonical" href="https://saintmalik.me">
-        <link rel="icon" sizes="16x16" href="assets/favicon-16x16.png">
-        <link rel="icon" sizes="32x32" href="assets/favicon-32x32.png">
-        <link rel="icon" sizes="192x192" href="assets/android-chrome-192x192.png">
-        <link rel="icon" sizes="512x512" href="assets/android-chrome-512x512.png">
-        <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-        <link
-            rel="preload"
-            href="assets/ConfigRounded-Regular.woff2"
-            as="font"
-            type="font/woff2"
-        >
-        <link
-            rel="preload"
-            href="assets/ConfigRounded-Bold.woff2"
-            as="font"
-            type="font/woff2"
-        >
-        <link
-            rel="preload"
-            href="assets/ConfigRounded-Italic.woff2"
-            as="font"
-            type="font/woff2"
-        >
-        <link
-            rel="preload"
-            href="assets/ConfigRounded-Light.woff2"
-            as="font"
-            type="font/woff2"
-        >
-        <link
-            rel="preload"
-            href="assets/ConfigRounded-LightItalic.woff2"
-            as="font"
-            type="font/woff2"
-        >
-        <link
-            rel="preload"
-            href="assets/ConfigRounded-SemiBold.woff2"
-            as="font"
-            type="font/woff2"
-        >
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <meta name="google-site-verification" content=" ">
-        <title>Abdulmalik</title>
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Abdulmalik Salawu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+    <meta name="google-adsense-account" content="ca-pub-3430013635403242">
+    <link rel="canonical" href="https://saintmalik.me">
+    <link rel="icon" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="icon" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" sizes="192x192" href="assets/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="assets/android-chrome-512x512.png">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="google-site-verification" content=" ">
+    <title>Abdulmalik Salawu - Application Security Engineer</title>
+    <style>
         :root {
             --background-color: #fff;
-            --text-color: #000;
-            --link-color: #007bff;
-            --border-color: #ddd;
-            --table-header-bg: #f8f9fa;
+            --text-color: #1a1a1a;
+            --link-color: #3b82f6;
+            --border-color: #e5e7eb;
+            --accent-color: #3b82f6;
         }
+
         @media (prefers-color-scheme: dark) {
             :root {
-                --background-color: #00040d;
-                --text-color: #f8f9fa;
-                --link-color: #66b2ff;
-                --border-color: #444;
-                --table-header-bg: #333;
+                --background-color: #151515;
+                --text-color: #e5e7eb;
+                --link-color: #60a5fa;
+                --border-color: #4b5563;
+                --accent-color: #60a5fa;
             }
         }
+
         body {
-            font-family: 'ConfigRounded-Regular', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             background-color: var(--background-color);
             color: var(--text-color);
+            line-height: 1.75;
+            transition: all 0.3s ease;
         }
+
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
-        header, section, footer {
-            padding: 0px 0;
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
+
+        .header-image {
+            flex-shrink: 0;
+        }
+
+        .header-text {
+            flex: 1;
+            margin-right: 2rem;
+        }
+
         .circle-image {
             border-radius: 50%;
-            display: block;
-            margin: 0 auto;
+            width: 270px;
+            height: 270px;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
         }
-        h1, h2, h3 {
-            /* text-align: center; */
+
+        h1, h2 {
             line-height: 1.2;
-            /* margin: 0.2rem 0 0.05rem;
-    font-weight: 600; */
-    /* line-height: 1.2 */
+            margin: 0.5rem 0;
         }
-        p, a {
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .dark h2 {
+            color: #9ca3af;
+        }
+
+        p {
             font-size: 1.1rem;
-            line-height: 1.6;
+            margin-bottom: 1rem;
         }
+
         a {
             color: var(--link-color);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
+
         a:hover {
             text-decoration: underline;
+            color: #2563eb;
         }
-        .projects-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        .projects-table th, .projects-table td {
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            text-align: left;
-        }
-        .projects-table th {
-            background-color: var(--table-header-bg);
-        }
-        .projects-table a {
-            color: var(--link-color);
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .projects-table {
-                width: 100%;
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            .projects-table th, .projects-table td {
-                display: block;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .projects-table th {
-                background-color: var(--background-color);
-                border: none;
-            }
-        }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <img
-                    src="assets/apple-touch-icon.png"
-                    alt="Abdulmalik's Profile Picture"
-                    class="circle-image"
-                    width="150"
-                >
-                <h3>Hi! I'm Abdulmalik, an Application Security Engineer</h3>
-            </header>
-            <section>
-                <p>Here I post mostly technical stuff and occasional rant. Find my posts on the <a href="https://blog.saintmalik.me/" target="_blank">blog page</a>.
-                </p>
-                <p>I am primarily focused on Application Security, DevSecOps, and DevOps.</p>
-                <p>In the past, I have responsibly disclosed security vulnerabilities to several companies, including OpenClassroom, Andela, and Kuda.</p>
-                <p>I love building backend side projects with Go, learning and simplifying complex stuffs.</p>
-                 <p>I have experience working with various technologies such as CI/CD pipelines, Docker, Kubernetes, Golang, IaC, HashiCorp Vault, SAST tools like Semgrep and more.</p>
-                <p>I am an advocate for open source and aim to contribute to security-focused projects in the future, see my past contributions <a href="https://ossrank.com/c/191264-saintmalik" target="_blank">here</a>.</p>
-                <p>To contact me, send an email via <a href="mailto:abdulmalik@saintmalik.me" target="_blank">email</a>, connect on <a href="https://linkedin.com/in/saintmalik" target="_blank">LinkedIn</a>, or follow me on <a href="https://twitter.com/saintmalik_" target="_blank">Twitter</a>.
-                </p>
-            </section>
-            <hr class="thin">
-            <section>
-                <h3 id="projects">
-                    Recent Projects
-                </h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="text-align: left;"></th>
-                            <th style="text-align: left;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="text-align: left;">
-                                <a href="https://cloudwatch.saintmalik.me" target="_blank">CloudWatchDog</a>
-                            </td>
-                            <td style="text-align: left;">
-                              Gain greater visibility, control, and optimization over your AWS cloud infrastructure.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;">
-                                <a href="https://sendwish.saintmalik.me" target="_blank">SendWish</a>
-                            </td>
-                            <td style="text-align: left;">
-                                an uncomplicated kinsfolk, comradeship wishes service.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;">
-                                <a href="https://delta.saintmalik.me" target="_blank">Delta</a>
-                            </td>
-                            <td style="text-align: left;">
-                                Break free from Helm chart release update chaos - your path to effortless management.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;">
-                                <a href="https://wame.saintmalik.me" target="_blank">wame.io</a>
-                            </td>
-                            <td style="text-align: left;">
-                                send many whatsapp number messages without saving the contacts
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;">
-                                <a href="https://github.com/saintmalik/awesome-oss-docs" target="_blank">Awesome OSS Docs</a>
-                            </td>
-                            <td style="text-align: left;">
-                                directory of all open source documentation
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;">
-                                <a href="https://dca.saintmalik.me" target="_blank">dcatool</a>
-                            </td>
-                            <td style="text-align: left;">
-                                A CLI for Dollar Cost Averaging on crypto via Binance
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left;">
-                                <a href="https://cointime.saintmalik.me" target="_blank">What If I Had Invested</a>
-                            </td>
-                            <td style="text-align: left;">
-                                coin time machine a coin calculator that helps crypto investors
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-            <section>
-                <a href="https://bit.ly/AbdulmalikSalawuResume" target="_blank"><h3><i class="fas fa-link"></i> Resume</h3></a>
-            </section>
-            <section>
-                <h3 id="presentations">
-                    Presentations
-                </h3>
-                <p>I've had the privilege of delivering several presentations. Here's a glimpse of some of them</p>
-                <h3 style="color: #0f9d58;"># DevSecOps - Why, What and How
-                    <span class=sr-only>Link to heading</span></h3><p>My talk at GreyHat Cyber Solutions on DevSecOps - Why, What and How</p>
-                    <div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>                <iframe
-                        src="https://docs.google.com/presentation/d/1UpsmkknFwbhYxVJtnoPJDweM1g9YP4i-voDbvEr_kdk/embed?start=false&loop=false&delayms=3000"
-                        frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true"
-                        webkitallowfullscreen="true"></iframe></div>
-                <h3 style="color: #0f9d58;"># Introduction to Open Source and OSCA
-                    <span class=sr-only>Link to heading</span></h3><p>My talk at OSCA Eldoret in 2022 on Getting into Open Source and what OSCA (Open Source Community Africa) is all about</p>
-                    <div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading=eager referrerpolicy=strict-origin-when-cross-origin src="https://www.youtube.com/embed/6XKddR46Hzo?si=sRJo2KG1d0qmQvhh?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 title="YouTube video"></iframe></div>
-                    <h3 style="color: #0f9d58;"># All about Subdomain Takeover</h3>
-                    <p>My talk at GreyHat Cyber Solutions on Subdomain Takeover: Web Application Security </p><div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading=eager referrerpolicy=strict-origin-when-cross-origin src="https://drive.google.com/file/d/1Be8dSz54Mw-z_yc2U42BzkQVqaGQTF_W/preview" style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 title="YouTube video"></iframe></div>
-                    <h3 style="color: #0f9d58;"># Getting Started With Open Source | OpenSource 101
-                        <span class=sr-only>Link to heading</span></h3><p>My talk at OSCA Ado Ekiti on Getting Started With Open Source | OpenSource 101 </p>
-                        <div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>                <iframe
-                            src="https://docs.google.com/presentation/d/1CHcpUyf2OPXhLi4pVDSLAUNtkSAYWS9fNDU2xreT69Y/embed?start=false&loop=false&delayms=3000"
-                            frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true"
-                            webkitallowfullscreen="true"></iframe></div>
-                    <h3 style="color: #0f9d58;"># Ethical Web Hacking 101
-                    <span class=sr-only>Link to heading</span></h3>
-                    <p>My talk at Diary of Hackers #CyberUp 2020 on about Ethical Web Hacking 101</p>
-                    <div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading=eager referrerpolicy=strict-origin-when-cross-origin src="https://www.youtube.com/embed/c0kw7alNzZk?si=v-qq1WNrZCLwECSO?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 title="YouTube video"></iframe></div>
-            </section>
-        </div>
-    </body>
-    <footer>
 
-    </footer>
+        .dark a:hover {
+            color: #93c5fd;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .social-links i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-image {
+                order: -1; /* Moves the image to the top on mobile */
+            }
+
+            .header-text {
+                margin-right: 0;
+                margin-top: 1rem; /* Adjusted to add space between image and text */
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .social-links {
+                align-items: center;
+            }
+
+            .circle-image {
+                width: 200px; /* Increased from 150px to 200px for better clarity */
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-text">
+                <h1>Abdulmalik Salawu</h1>
+                <h2>AppSec/DevSecOps Engineer</h2>
+                <div class="social-links">
+                    <!-- <a href="/projects" target="_blank"><i class="fas fa-globe"></i>Projects</a> -->
+                    <a href="https://bit.ly/AbdulmalikSalawuResume" target="_blank"><i class="fas fa-file-alt"></i>Resume</a>
+                    <a href="https://linkedin.com/in/saintmalik" target="_blank"><i class="fab fa-linkedin"></i>linkedin/in/saintmalik</a>
+                    <a href="mailto:abdulmalik@saintmalik.me"><i class="fas fa-envelope"></i>abdulmalik@saintmalik.me</a>
+                </div>
+            </div>
+            <div class="header-image">
+                <img src="assets/abdulmalik.JPG" alt="Abdulmalik's Profile Picture" class="circle-image">
+            </div>
+        </header>
+
+        <!-- About -->
+        <section>
+            <h2>About</h2>
+            <p>I’m an Engineer who excels across various roles, from Application Security to DevSecOps, and DevOps. I excel at securing digital ecosystems and simplifying complex challenges.</p>
+            <p>In the past, I’ve responsibly disclosed security vulnerabilities to companies like OpenClassroom, Andela, and Kuda. I’m passionate about building backend side projects with Golang and contributing to open source projects, see my contributions <a href="https://ossrank.com/c/191264-saintmalik" target="_blank">here</a>.</p>
+            <p>Here are some technologies I’ve worked with:</p>
+            <ul>
+                <li>CI/CD pipelines (Gitlab, Github Actions)</li>
+                <li>Kubernetes/Docker</li>
+                <li>Golang/Bash</li>
+                <li>Infrastructure as Code (Terraform, Ansible)</li>
+                <li>HashiCorp Vault/Azure Vault/AWS Parameter Store</li>
+                <li>SAST tools like Semgrep</li>
+            </ul>
+            <p>I enjoy spending my free time on reading on new security digest, exploits and infrastructure tooling, and I build products, which are birthed from my own personal experience.</p>
+            <p>Check out my <a href="https://blog.saintmalik.me/" target="_blank">blog</a> for technical insights and occasional rants.</p>
+        </section>
+    </div>
+
+    <!-- Cloudflare Pages Analytics -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4058fbba0a25462e8cdcb841fc0adf51"}' type="0461f6392cad34eebc0b88cd-text/javascript"></script>
+    <script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="0461f6392cad34eebc0b88cd-|49" defer></script>
+</body>
 </html>
