@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Abdulmalik Salawu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Abdulmalik Salawu - Projects</title>
+    <meta name="description" content="Explore my products and open-source projects in application security and DevSecOps.">
+    <meta property="og:title" content="Abdulmalik Salawu - Projects">
+    <meta property="og:description" content="Explore my products and open-source projects in application security and DevSecOps.">
+    <meta property="og:url" content="https://saintmalik.me/projects/">
+    <meta property="og:site_name" content="saintmalik.me">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Abdulmalik Salawu - Projects">
+    <meta name="twitter:description" content="Explore my products and open-source projects in application security and DevSecOps.">
+
+    <style>
+        :root {
+            --background-color: #fff;
+            --text-color: #1a1a1a;
+            --link-color: #3b82f6;
+            --border-color: #e5e7eb;
+            --accent-color: #3b82f6;
+            --card-bg: #f9fafb;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #151515;
+                --text-color: #e5e7eb;
+                --link-color: #60a5fa;
+                --border-color: #4b5563;
+                --accent-color: #60a5fa;
+                --card-bg: #1f1f1f;
+            }
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.75;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .navbar-brand:hover {
+            color: var(--link-color);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .navbar-links a {
+            font-size: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-links a:hover,
+        .navbar-links a.active {
+            opacity: 1;
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--link-color);
+        }
+
+        .dark-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .dark-toggle input {
+            appearance: none;
+            width: 40px;
+            height: 20px;
+            background: var(--border-color);
+            border-radius: 9999px;
+            position: relative;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dark-toggle input::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .dark-toggle input:checked::before {
+            transform: translateX(20px);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-card h3 a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .project-card h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
+            color: #6b7280;
+        }
+
+        .dark .project-card p {
+            color: #9ca3af;
+        }
+
+        .project-card .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .project-card .tag {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .project-card .status {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            margin-left: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .navbar-links {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="/" class="navbar-brand">Abdulmalik Salawu</a>
+            <div class="navbar-links">
+                <a href="/">Home</a>
+                <a href="/projects" class="active">Projects</a>
+                <a href="https://blog.saintmalik.me">Blog</a>
+            </div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/saintmalik" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:abdulmalik@saintmalik.me" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </nav>
+
+        <!-- Projects Section -->
+        <section>
+            <h2>Products</h2>
+            <hr>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>
+                        <i class="fas fa-house"></i>
+                        <a href="https://houseakopa.com">House A Kopa</a>
+                    </h3>
+                    <p>Fastest way for Corps members to secure verified apartments, furnish your new home with essentials at lower prices, and explore Nigeria together during your service year.</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fas fa-rocket"></i>
+                        <a href="https://sendwish.app">SendWish</a>
+                    </h3>
+                    <p>Create meaningful connections through personalized, heartfelt wishes that resonate with your loved ones on every special occasion.                    </p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fas fa-globe"></i>
+                        <a href="https://stickerkeen.com">Stickerkeen</a>
+                    </h3>
+                    <p>Your one-stop merch platform: Create, manage, and distribute quality merchandise to everyone in africa.</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> NextJS/NuxtJS</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fas fa-robot"></i>
+                        <a href="https://plixa.stickerkeen.com">Plixa</a>
+                    </h3>
+                    <p>Experience the future of laundry with our premium dry cleaning service. Delivered to your doorstep in Ilorin with unmatched quality and care.</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fas fa-rocket"></i>
+                        <a href="https://dca-tool.netlify.app">Dollar Cost Averaging Tool</a>
+                    </h3>
+                    <p>Tool helps purchase the cryptocurrency you've set with your Binance account based on market percentage change.</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fas fa-cloud"></i>
+                        <a href="https://cloudwatch.saintmalik.me/">CloudWatchDog</a>
+                    </h3>
+                    <p>Cloud management application providing AWS users with enhanced visibility and resource optimization, detailed cost analysis, automated cleanup of unused resources, and integrated monitoring with Slack alerts</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Open Source Projects Section -->
+        <section>
+            <h2>Open Source Projects</h2>
+            <hr>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/saintmalik/awesome-oss-docs">Awesome OSS Docs</a>
+                        <span class="status">Public</span>
+                    </h3>
+                    <p>📚 A curated list of awesome open source documentation for people whole love contributing to docs (Documentarians).</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i>Javascript</span>
+                        <span class="tag"><i class="fas fa-star"></i> 117</span>
+                        <span class="tag"><i class="fas fa-code-branch"></i> 62</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/saintmalik/cloudflare-zero-trust-ec2">Cloudflare Zero Trust EC2</a>
+                        <span class="status">Public</span>
+                    </h3>
+                    <p>Zero trust security for AWS EC2 instances using Cloudflare Access.</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i>Terraform/OpenTofu</span>
+                        <!-- <span class="tag"><i class="fas fa-star"></i> 150</span>
+                        <span class="tag"><i class="fas fa-code-branch"></i> 25</span> -->
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/saintmalik/allgood">AllGood</a>
+                        <span class="status">Public</span>
+                    </h3>
+                    <p>✅ Quickly set up a health check page for your Golang application.</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                        <span class="tag"><i class="fas fa-star"></i> 0</span>
+                        <span class="tag"><i class="fas fa-code-branch"></i> 1</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/saintmalik/blue-green-ec2">Blue Green EC2 Deployment</a>
+                        <span class="status">Public</span>
+                    </h3>
+                    <p>Blue Green Deployment for AWS EC2 instances.</p>
+                    <div class="tags">
+                        <span class="tag"><i class="fas fa-code"></i> Terraform/OpenTofu/Ansible</span>
+                        <span class="tag"><i class="fas fa-star"></i> 2</span>
+                        <span class="tag"><i class="fas fa-code-branch"></i> 1</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Abdulmalik Salawu | <a href="https://saintmalik.me">saintmalik.me</a></p>
+        </footer>
+    </div>
+
+    <!-- Dark Mode Script -->
+    <script>
+        const toggle = document.getElementById('darkToggle');
+        const root = document.documentElement;
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let isDark = localStorage.getItem('isdark') ? JSON.parse(localStorage.getItem('isdark')) : systemPrefersDark;
+
+        toggle.checked = isDark;
+        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+
+        toggle.addEventListener('change', () => {
+            isDark = toggle.checked;
+            localStorage.setItem('isdark', JSON.stringify(isDark));
+            root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>
