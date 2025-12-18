@@ -2,232 +2,352 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Abdulmalik Salawu">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark light">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
-    <meta name="google-adsense-account" content="ca-pub-3430013635403242">
-    <link rel="canonical" href="https://saintmalik.me">
-    <link rel="icon" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="icon" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" sizes="192x192" href="assets/android-chrome-192x192.png">
-    <link rel="icon" sizes="512x512" href="assets/android-chrome-512x512.png">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <meta name="author" content="Abdulmalik Salawu">
+    <title>Abdulmalik Salawu - Application Security Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="google-site-verification" content=" ">
-    <title>Abdulmalik Salawu - Application Security Engineer</title>
     <style>
-        :root {
-            --background-color: #fff;
-            --text-color: #1a1a1a;
-            --link-color: #3b82f6;
-            --border-color: #e5e7eb;
-            --accent-color: #3b82f6;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-color: #151515;
-                --text-color: #e5e7eb;
-                --link-color: #60a5fa;
-                --border-color: #4b5563;
-                --accent-color: #60a5fa;
-            }
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.75;
-            transition: all 0.3s ease;
+        }
+
+        :root {
+            --background: #000000;
+            --muted: #888888;
+            --accent: #ffffff;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--background);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            z-index: 1;
         }
 
         header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
+            margin-bottom: 80px;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .header-image {
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .profile-section {
+            flex: 1;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
             flex-shrink: 0;
         }
 
-        .header-text {
-            flex: 1;
-            margin-right: 2rem;
-        }
-
-        .circle-image {
+        .profile-image {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            width: 270px;
-            height: 270px;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             object-fit: cover;
+            border: 2px solid var(--accent);
+            transition: transform 0.5s ease, border-color 0.3s ease;
         }
 
-        h1, h2 {
-            line-height: 1.2;
-            margin: 0.5rem 0;
+        .profile-image:hover {
+            transform: scale(1.05);
+            border-color: var(--muted);
+        }
+
+        .profile-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), transparent);
+            opacity: 0.1;
+            animation: pulse 3s ease-in-out infinite;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: #6b7280;
-        }
-
-        .dark h2 {
-            color: #9ca3af;
-        }
-
-        p {
+        .subtitle {
             font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: #2563eb;
-        }
-
-        .dark a:hover {
-            color: #93c5fd;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid var(--border-color);
-            margin: 2rem 0;
+            color: var(--muted);
+            font-weight: 400;
+            margin-bottom: 24px;
         }
 
         .social-links {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .social-links a {
-            display: flex;
+        .social-link {
+            display: inline-flex;
             align-items: center;
-            color: var(--text-color);
-            font-size: 1rem;
+            gap: 8px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--muted), transparent);
+            margin: 40px 0;
+            opacity: 0.3;
+        }
+
+        section {
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: inline-block;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        p {
+            color: var(--muted);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            position: relative;
             transition: color 0.3s ease;
         }
 
-        .social-links a:hover {
-            color: var(--link-color);
-            text-decoration: none;
+        a:hover {
+            color: var(--muted);
         }
 
-        .social-links i {
-            margin-right: 0.5rem;
-            font-size: 1.2rem;
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        a:hover::after {
+            width: 100%;
         }
 
         ul {
-            list-style-type: disc;
-            margin: 1rem 0;
-            padding-left: 2rem;
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+            margin-bottom: 24px;
         }
 
         li {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            padding: 12px 16px;
+            border: 1px solid rgba(136, 136, 136, 0.2);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        li:hover {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        li::before {
+            content: '▹';
+            color: var(--accent);
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.2;
+                transform: scale(1.05);
+            }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 20px 15px;
+                padding: 40px 24px;
             }
 
-            header {
+            .header-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 30px;
             }
 
-            .header-image {
-                order: -1; /* Moves the image to the top on mobile */
-            }
-
-            .header-text {
-                margin-right: 0;
-                margin-top: 1rem; /* Adjusted to add space between image and text */
+            .profile-image-wrapper {
+                order: -1;
+                width: 180px;
+                height: 180px;
             }
 
             h1 {
                 font-size: 2rem;
             }
 
-            h2 {
-                font-size: 1.25rem;
+            .subtitle {
+                font-size: 1rem;
             }
 
             .social-links {
-                align-items: center;
+                justify-content: center;
             }
 
-            .circle-image {
-                width: 200px; /* Increased from 150px to 200px for better clarity */
-                height: 200px;
+            ul {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="grain"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    
     <div class="container">
-        <!-- Header -->
         <header>
-            <div class="header-text">
-                <h1>Abdulmalik Salawu</h1>
-                <h2>AppSec/DevSecOps Engineer</h2>
-                <div class="social-links">
-                    <!-- <a href="/projects" target="_blank"><i class="fas fa-globe"></i>Projects</a> -->
-                    <a href="https://linkedin.com/in/saintmalik" target="_blank"><i class="fab fa-linkedin"></i>linkedin/in/saintmalik</a>
-                    <a href="mailto:abdulmalik@saintmalik.me"><i class="fas fa-envelope"></i>abdulmalik@saintmalik.me</a>
+            <div class="header-content">
+                <div class="profile-section">
+                    <h1>Abdulmalik Salawu</h1>
+                    <p class="subtitle">AppSec/DevSecOps Engineer</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/saintmalik" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="mailto:abdulmalik@saintmalik.me" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="header-image">
-                <img src="assets/abdulmalik.JPG" alt="Abdulmalik's Profile Picture" class="circle-image">
+                <div class="profile-image-wrapper">
+                    <img src="assets/abdulmalik.JPG" alt="Abdulmalik Salawu" class="profile-image">
+                </div>
             </div>
         </header>
 
-        <!-- About -->
+        <div class="divider"></div>
+
         <section>
             <h2>About</h2>
-            <p>I’m an Engineer who excels across various roles, from Application Security to DevSecOps, and DevOps. I excel at securing digital ecosystems and simplifying complex challenges.</p>
-            <p>In the past, I’ve responsibly disclosed security vulnerabilities to companies like OpenClassroom, Andela, and Kuda. I’m passionate about building backend side projects with Golang and contributing to open source projects, see my contributions <a href="https://ossrank.com/c/191264-saintmalik" target="_blank">here</a>.</p>
-            <p>Here are some technologies I’ve worked with:</p>
+            <p>I'm an Engineer who excels across various roles, from Application Security to DevSecOps, and DevOps. I excel at securing digital ecosystems and simplifying complex challenges.</p>
+            <p>In the past, I've responsibly disclosed security vulnerabilities to companies like OpenClassroom, Andela, and Kuda. I'm passionate about building backend side projects with Golang and contributing to open source projects, see my contributions <a href="https://ossrank.com/c/191264-saintmalik" target="_blank">here</a>.</p>
+            <p>Here are some technologies I've worked with:</p>
             <ul>
                 <li>CI/CD pipelines (Gitlab, Github Actions)</li>
                 <li>Kubernetes/Docker</li>
@@ -241,16 +361,44 @@
         </section>
     </div>
 
-    <!-- Cloudflare Pages Analytics -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "rb5lzwkxst");
+    <script>
+        // Cursor glow effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animate() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
     </script>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4058fbba0a25462e8cdcb841fc0adf51"}' type="0461f6392cad34eebc0b88cd-text/javascript"></script>
-    <script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="0461f6392cad34eebc0b88cd-|49" defer></script>
 </body>
 </html>

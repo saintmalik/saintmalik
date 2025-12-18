@@ -2,422 +2,504 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Abdulmalik Salawu">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark light">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="author" content="Abdulmalik Salawu">
     <title>Abdulmalik Salawu - Projects</title>
     <meta name="description" content="Explore my products and open-source projects in application security and DevSecOps.">
-    <meta property="og:title" content="Abdulmalik Salawu - Projects">
-    <meta property="og:description" content="Explore my products and open-source projects in application security and DevSecOps.">
-    <meta property="og:url" content="https://saintmalik.me/projects/">
-    <meta property="og:site_name" content="saintmalik.me">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Abdulmalik Salawu - Projects">
-    <meta name="twitter:description" content="Explore my products and open-source projects in application security and DevSecOps.">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --background-color: #fff;
-            --text-color: #1a1a1a;
-            --link-color: #3b82f6;
-            --border-color: #e5e7eb;
-            --accent-color: #3b82f6;
-            --card-bg: #f9fafb;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-color: #151515;
-                --text-color: #e5e7eb;
-                --link-color: #60a5fa;
-                --border-color: #4b5563;
-                --accent-color: #60a5fa;
-                --card-bg: #1f1f1f;
-            }
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.75;
-            transition: all 0.3s ease;
+        }
+
+        :root {
+            --background: #000000;
+            --muted: #888888;
+            --accent: #ffffff;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--background);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 40px;
+            position: relative;
         }
 
-        .navbar {
+        .cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out;
             flex-wrap: wrap;
-            margin-bottom: 40px;
+            gap: 20px;
         }
 
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .navbar-brand:hover {
-            color: var(--link-color);
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .navbar-links a {
-            font-size: 1rem;
-            color: var(--text-color);
-            text-decoration: none;
-            opacity: 0.7;
-            transition: opacity 0.3s ease, color 0.3s ease;
-        }
-
-        .navbar-links a:hover,
-        .navbar-links a.active {
-            opacity: 1;
-            color: var(--link-color);
-            text-decoration: underline;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .social-links a {
-            color: var(--text-color);
+        .nav-brand {
             font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .social-links a:hover {
-            color: var(--link-color);
+        .nav-brand:hover {
+            color: var(--muted);
         }
 
-        .dark-toggle {
+        .nav-links {
             display: flex;
+            gap: 24px;
             align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
         }
 
-        .dark-toggle input {
-            appearance: none;
-            width: 40px;
-            height: 20px;
-            background: var(--border-color);
-            border-radius: 9999px;
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
             position: relative;
-            cursor: pointer;
-            outline: none;
         }
 
-        .dark-toggle input::before {
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a.active::after {
             content: '';
             position: absolute;
-            width: 16px;
-            height: 16px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s ease;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
         }
 
-        .dark-toggle input:checked::before {
-            transform: translateX(20px);
+        .social-icons {
+            display: flex;
+            gap: 16px;
         }
 
+        .social-icons a {
+            color: var(--muted);
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Section Headers */
         h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            display: inline-block;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
         }
 
-        hr {
-            border: 0;
-            border-top: 1px solid var(--border-color);
-            margin: 1.5rem 0;
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
         }
 
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--muted), transparent);
+            margin: 48px 0;
+            opacity: 0.3;
+        }
+
+        /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
         }
 
         .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(136, 136, 136, 0.2);
             border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 24px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
         }
 
-        .project-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin: 0 0 0.5rem;
+        .project-header {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
-        .project-card h3 a {
-            color: var(--link-color);
+        .project-icon {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .project-title {
+            flex: 1;
+        }
+
+        .project-title h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .project-title h3 a {
+            color: var(--accent);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .project-card h3 a:hover {
-            text-decoration: underline;
+        .project-title h3 a:hover {
+            color: var(--muted);
         }
 
-        .project-card p {
-            font-size: 0.95rem;
-            margin: 0.5rem 0;
-            color: #6b7280;
+        .status-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 12px;
+            color: var(--muted);
+            margin-left: 8px;
         }
 
-        .dark .project-card p {
-            color: #9ca3af;
+        .project-description {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
 
-        .project-card .tags {
+        .project-meta {
             display: flex;
-            gap: 0.5rem;
+            gap: 16px;
             flex-wrap: wrap;
-            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--muted);
         }
 
-        .project-card .tag {
-            font-size: 0.85rem;
-            color: var(--text-color);
-            opacity: 0.7;
+        .meta-item {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 6px;
         }
 
-        .project-card .status {
-            font-size: 0.85rem;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 9999px;
-            margin-left: 0.5rem;
+        .meta-item i {
+            font-size: 0.9rem;
         }
 
+        /* Section Animation Delays */
+        .projects-grid .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .projects-grid .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .projects-grid .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .projects-grid .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .projects-grid .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .projects-grid .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Footer */
         footer {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.95rem;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(136, 136, 136, 0.2);
+            color: var(--muted);
+            font-size: 0.9rem;
         }
 
         footer a {
-            color: var(--link-color);
+            color: var(--accent);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: var(--muted);
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 20px 15px;
+                padding: 40px 24px;
             }
 
-            .navbar {
+            nav {
                 flex-direction: column;
-                gap: 1rem;
                 text-align: center;
+                gap: 16px;
             }
 
-            .navbar-links {
-                justify-content: center;
+            .nav-links {
+                flex-direction: row;
+                gap: 16px;
             }
 
-            .social-links {
-                justify-content: center;
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
 
             h2 {
                 font-size: 1.5rem;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .project-card {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="grain"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <div class="container">
         <!-- Navigation -->
-        <nav class="navbar">
-            <a href="/" class="navbar-brand">Abdulmalik Salawu</a>
-            <div class="navbar-links">
+        <nav>
+            <a href="/" class="nav-brand">Abdulmalik Salawu</a>
+            <div class="nav-links">
                 <a href="/">Home</a>
                 <a href="/projects" class="active">Projects</a>
                 <a href="https://blog.saintmalik.me">Blog</a>
             </div>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/saintmalik" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:abdulmalik@saintmalik.me" title="Email"><i class="fas fa-envelope"></i></a>
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/saintmalik" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:abdulmalik@saintmalik.me" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
         </nav>
 
-        <!-- Projects Section -->
+        <!-- Products Section -->
         <section>
             <h2>Products</h2>
-            <hr>
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>
-                        <i class="fas fa-house"></i>
-                        <a href="https://houseakopa.com">House A Kopa</a>
-                    </h3>
-                    <p>Fastest way for Corps members to secure verified apartments, furnish your new home with essentials at lower prices, and explore Nigeria together during your service year.</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    <div class="project-header">
+                        <i class="fas fa-house project-icon"></i>
+                        <div class="project-title">
+                            <h3><a href="https://houseakopa.com" target="_blank">House A Kopa</a></h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Fastest way for Corps members to secure verified apartments, furnish your new home with essentials at lower prices, and explore Nigeria together during your service year.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Go</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fas fa-rocket"></i>
-                        <a href="https://sendwish.app">SendWish</a>
-                    </h3>
-                    <p>Create meaningful connections through personalized, heartfelt wishes that resonate with your loved ones on every special occasion.                    </p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    <div class="project-header">
+                        <i class="fas fa-rocket project-icon"></i>
+                        <div class="project-title">
+                            <h3><a href="https://sendwish.app" target="_blank">SendWish</a></h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Create meaningful connections through personalized, heartfelt wishes that resonate with your loved ones on every special occasion.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Go</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fas fa-globe"></i>
-                        <a href="https://stickerkeen.com">Stickerkeen</a>
-                    </h3>
-                    <p>Your one-stop merch platform: Create, manage, and distribute quality merchandise to everyone in africa.</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> NextJS/NuxtJS</span>
+                    <div class="project-header">
+                        <i class="fas fa-globe project-icon"></i>
+                        <div class="project-title">
+                            <h3><a href="https://stickerkeen.com" target="_blank">Stickerkeen</a></h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Your one-stop merch platform: Create, manage, and distribute quality merchandise to everyone in africa.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> NextJS/NuxtJS</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fas fa-robot"></i>
-                        <a href="https://plixa.stickerkeen.com">Plixa</a>
-                    </h3>
-                    <p>Experience the future of laundry with our premium dry cleaning service. Delivered to your doorstep in Ilorin with unmatched quality and care.</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    <div class="project-header">
+                        <i class="fas fa-robot project-icon"></i>
+                        <div class="project-title">
+                            <h3><a href="https://plixa.stickerkeen.com" target="_blank">Plixa</a></h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Experience the future of laundry with our premium dry cleaning service. Delivered to your doorstep in Ilorin with unmatched quality and care.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Go</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fas fa-rocket"></i>
-                        <a href="https://dca-tool.netlify.app">Dollar Cost Averaging Tool</a>
-                    </h3>
-                    <p>Tool helps purchase the cryptocurrency you've set with your Binance account based on market percentage change.</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    <div class="project-header">
+                        <i class="fas fa-rocket project-icon"></i>
+                        <div class="project-title">
+                            <h3><a href="https://dca-tool.netlify.app" target="_blank">Dollar Cost Averaging Tool</a></h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Tool helps purchase the cryptocurrency you've set with your Binance account based on market percentage change.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Go</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fas fa-cloud"></i>
-                        <a href="https://cloudwatch.saintmalik.me/">CloudWatchDog</a>
-                    </h3>
-                    <p>Cloud management application providing AWS users with enhanced visibility and resource optimization, detailed cost analysis, automated cleanup of unused resources, and integrated monitoring with Slack alerts</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> Go</span>
+                    <div class="project-header">
+                        <i class="fas fa-cloud project-icon"></i>
+                        <div class="project-title">
+                            <h3><a href="https://cloudwatch.saintmalik.me/" target="_blank">CloudWatchDog</a></h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Cloud management application providing AWS users with enhanced visibility and resource optimization, detailed cost analysis, automated cleanup of unused resources, and integrated monitoring with Slack alerts</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Go</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Open Source Projects Section -->
+        <div class="divider"></div>
+
+        <!-- Open Source Section -->
         <section>
             <h2>Open Source Projects</h2>
-            <hr>
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/saintmalik/awesome-oss-docs">Awesome OSS Docs</a>
-                        <span class="status">Public</span>
-                    </h3>
-                    <p>📚 A curated list of awesome open source documentation for people whole love contributing to docs (Documentarians).</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i>Javascript</span>
-                        <span class="tag"><i class="fas fa-star"></i> 117</span>
-                        <span class="tag"><i class="fas fa-code-branch"></i> 62</span>
+                    <div class="project-header">
+                        <i class="fab fa-github project-icon"></i>
+                        <div class="project-title">
+                            <h3>
+                                <a href="https://github.com/saintmalik/awesome-oss-docs" target="_blank">Awesome OSS Docs</a>
+                                <span class="status-badge">Public</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <p class="project-description">📚 A curated list of awesome open source documentation for people whole love contributing to docs (Documentarians).</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Javascript</span>
+                        <span class="meta-item"><i class="fas fa-star"></i> 117</span>
+                        <span class="meta-item"><i class="fas fa-code-branch"></i> 62</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/saintmalik/cloudflare-zero-trust-ec2">Cloudflare Zero Trust EC2</a>
-                        <span class="status">Public</span>
-                    </h3>
-                    <p>Zero trust security for AWS EC2 instances using Cloudflare Access.</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i>Terraform/OpenTofu</span>
-                        <!-- <span class="tag"><i class="fas fa-star"></i> 150</span>
-                        <span class="tag"><i class="fas fa-code-branch"></i> 25</span> -->
+                    <div class="project-header">
+                        <i class="fab fa-github project-icon"></i>
+                        <div class="project-title">
+                            <h3>
+                                <a href="https://github.com/saintmalik/cloudflare-zero-trust-ec2" target="_blank">Cloudflare Zero Trust EC2</a>
+                                <span class="status-badge">Public</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Zero trust security for AWS EC2 instances using Cloudflare Access.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Terraform/OpenTofu</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/saintmalik/allgood">AllGood</a>
-                        <span class="status">Public</span>
-                    </h3>
-                    <p>✅ Quickly set up a health check page for your Golang application.</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> Go</span>
-                        <span class="tag"><i class="fas fa-star"></i> 0</span>
-                        <span class="tag"><i class="fas fa-code-branch"></i> 1</span>
+                    <div class="project-header">
+                        <i class="fab fa-github project-icon"></i>
+                        <div class="project-title">
+                            <h3>
+                                <a href="https://github.com/saintmalik/allgood" target="_blank">AllGood</a>
+                                <span class="status-badge">Public</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <p class="project-description">✅ Quickly set up a health check page for your Golang application.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Go</span>
+                        <span class="meta-item"><i class="fas fa-star"></i> 0</span>
+                        <span class="meta-item"><i class="fas fa-code-branch"></i> 1</span>
                     </div>
                 </div>
+
                 <div class="project-card">
-                    <h3>
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/saintmalik/blue-green-ec2">Blue Green EC2 Deployment</a>
-                        <span class="status">Public</span>
-                    </h3>
-                    <p>Blue Green Deployment for AWS EC2 instances.</p>
-                    <div class="tags">
-                        <span class="tag"><i class="fas fa-code"></i> Terraform/OpenTofu/Ansible</span>
-                        <span class="tag"><i class="fas fa-star"></i> 2</span>
-                        <span class="tag"><i class="fas fa-code-branch"></i> 1</span>
+                    <div class="project-header">
+                        <i class="fab fa-github project-icon"></i>
+                        <div class="project-title">
+                            <h3>
+                                <a href="https://github.com/saintmalik/blue-green-ec2" target="_blank">Blue Green EC2 Deployment</a>
+                                <span class="status-badge">Public</span>
+                            </h3>
+                        </div>
+                    </div>
+                    <p class="project-description">Blue Green Deployment for AWS EC2 instances.</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-code"></i> Terraform/OpenTofu/Ansible</span>
+                        <span class="meta-item"><i class="fas fa-star"></i> 2</span>
+                        <span class="meta-item"><i class="fas fa-code-branch"></i> 1</span>
                     </div>
                 </div>
             </div>
@@ -429,20 +511,42 @@
         </footer>
     </div>
 
-    <!-- Dark Mode Script -->
     <script>
-        const toggle = document.getElementById('darkToggle');
-        const root = document.documentElement;
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        let isDark = localStorage.getItem('isdark') ? JSON.parse(localStorage.getItem('isdark')) : systemPrefersDark;
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
 
-        toggle.checked = isDark;
-        root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-        toggle.addEventListener('change', () => {
-            isDark = toggle.checked;
-            localStorage.setItem('isdark', JSON.stringify(isDark));
-            root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        function animate() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
         });
     </script>
 </body>
