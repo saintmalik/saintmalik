@@ -255,6 +255,9 @@ html[data-theme="dark"] .glass::after {
 .site-nav li.resume {
   margin-left: auto;
   padding-left: 6px;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
 }
 
 .site-nav a,
@@ -361,6 +364,12 @@ html[data-theme="dark"] .glass::after {
   border: 1px solid var(--rule) !important;
   border-radius: 8px !important;
   background: color-mix(in srgb, var(--bg) 60%, transparent) !important;
+  pointer-events: auto;
+  z-index: 3;
+  min-height: 44px;
+  min-width: 44px;
+  align-items: center;
+  touch-action: manipulation;
 }
 
 .nav-resume:hover {
@@ -369,14 +378,25 @@ html[data-theme="dark"] .glass::after {
 }
 
 @media (max-width: 639px) {
+  .site-nav {
+    overflow: visible;
+  }
+
   .site-nav ul {
     flex-wrap: wrap;
-    overflow-x: hidden;
-    row-gap: 2px;
+    overflow: visible;
+    row-gap: 4px;
+    align-items: stretch;
   }
 
   .site-nav li.resume {
     margin-left: auto;
+  }
+
+  .site-nav a,
+  .site-nav .nav-resume {
+    min-height: 44px;
+    align-items: center;
   }
 }
 
@@ -386,13 +406,12 @@ html[data-theme="dark"] .glass::after {
     gap: 0 1px;
   }
 
-  .site-nav a,
-  .site-nav .nav-resume {
-    padding: 5px 6px;
+  .site-nav a:not(.nav-resume) {
+    padding: 10px 6px;
   }
 
   .site-nav .nav-resume {
-    padding: 5px 8px !important;
+    padding: 10px 12px !important;
   }
 }
 
@@ -1026,18 +1045,22 @@ body[data-page="home"] .write-date {
 }
 
 .site-footer {
+  position: relative;
+  z-index: 51;
   margin-top: 48px;
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .footer-row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 12px 20px;
   flex-wrap: wrap;
   border-top: 1px solid var(--rule);
   padding: 20px 0 0;
+  position: relative;
+  z-index: 2;
 }
 
 .footer-links {
@@ -1067,9 +1090,11 @@ body[data-page="home"] .write-date {
 
 .footer-end {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 14px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .skyline {
@@ -1183,11 +1208,24 @@ html[data-theme="dark"] .glass::after {
 .theme-toggle {
   font-family: var(--font-mono);
   font-size: 14px;
+  line-height: 1;
   color: var(--ink-faint);
   background: none;
   border: 0;
-  padding: 0;
+  padding: 0 8px;
+  margin: 0 -8px;
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .theme-toggle:hover {

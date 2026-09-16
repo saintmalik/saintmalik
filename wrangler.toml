@@ -1,0 +1,12 @@
+# Static site for Cloudflare Workers. Dashboard Build output stays `output`.
+# Do not set main/binding/run_worker_first — assets-only (no Worker script).
+# html_handling maps /talks → talks.html without changing the URL.
+# not_found_handling must not be single-page-application or unknown paths serve index.html.
+
+name = "saintmalik"
+compatibility_date = "2026-09-16"
+
+[assets]
+directory = "./output"
+html_handling = "auto-trailing-slash"
+not_found_handling = "none"

@@ -166,6 +166,9 @@ function bindResumeModal() {
   renderResumeRoles();
   document.querySelectorAll("[data-resume-open]").forEach((el) => {
     el.addEventListener("click", (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      const modal = document.getElementById("resume-modal");
+      if (!modal) return;
       event.preventDefault();
       openResumeModal();
     });
