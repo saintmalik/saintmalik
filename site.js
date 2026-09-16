@@ -371,6 +371,69 @@ async function initOpenSource() {
   }
 }
 
+const WRITING_FEED = "/blog-feed.xml";
+const WRITING_LIMIT = 2;
+
+function formatWritingDate(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+function parseWritingFeed(xmlText) {
+  const doc = new DOMParser().parseFromString(xmlText, "text/xml");
+  if (doc.querySelector("parsererror")) throw new Error("feed xml");
+  return [...doc.querySelectorAll("channel > item")]
+    .map((item) => {
+      const title = (item.querySelector("title")?.textContent || "").trim();
+      const href = (item.querySelector("link")?.textContent || item.querySelector("guid")?.textContent || "").trim();
+      const pub = (item.querySelector("pubDate")?.textContent || "").trim();
+      const ms = Date.parse(pub);
+      return {
+        title,
+        href,
+        date: formatWritingDate(pub),
+        ms: Number.isNaN(ms) ? 0 : ms,
+      };
+    })
+    .filter((item) => item.title && item.href)
+    .sort((a, b) => b.ms - a.ms)
+    .slice(0, WRITING_LIMIT);
+}
+
+function writingHtml(items) {
+  return items
+    .map(
+      (item) => `
+          <li>
+            <a class="write-row" href="${escapeHtml(item.href)}" target="_blank" rel="noreferrer">
+              <span>${escapeHtml(item.title)}</span>
+              <span class="write-date">${escapeHtml(item.date)}</span>
+            </a>
+          </li>`
+    )
+    .join("");
+}
+
+async function initWriting() {
+  const root = document.getElementById("writing-list");
+  if (!root) return;
+  try {
+    const res = await fetch(WRITING_FEED, { cache: "no-store" });
+    if (!res.ok) throw new Error("feed");
+    const items = parseWritingFeed(await res.text());
+    if (!items.length) throw new Error("empty");
+    root.innerHTML = writingHtml(items);
+  } catch {
+    // keep the two Sep 12 posts already in the HTML
+  }
+}
+
 const MODAL_HTML = `
   <div class="resume-modal" id="resume-modal" hidden>
     <div class="resume-modal-backdrop" data-resume-close></div>
@@ -417,6 +480,7 @@ function boot() {
   setInterval(tickClock, 30000);
   bindKeys();
   if (document.body.dataset.page === "oss") initOpenSource();
+  if (document.body.dataset.page === "home") initWriting();
   if (document.body.dataset.page === "resume") openResumeModal();
 }
 

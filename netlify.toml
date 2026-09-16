@@ -1,4 +1,5 @@
 # OSS list is assets/oss.json (GitHub Action refreshes it).
+# Home writing list fetches /blog-feed.xml (proxied Docusaurus RSS).
 
 [build]
   command = "true"
@@ -12,6 +13,12 @@ status = 200
 from = "/oss.json"
 to = "/assets/oss.json"
 status = 200
+
+[[redirects]]
+from = "/blog-feed.xml"
+to = "https://blog.saintmalik.me/rss.xml"
+status = 200
+force = true
 
 [[redirects]]
 from = "/posts/"
@@ -67,6 +74,12 @@ for = "/llms-full.txt"
   [headers.values]
   Content-Type = "text/plain; charset=utf-8"
   Link = "</llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+
+[[headers]]
+for = "/blog-feed.xml"
+  [headers.values]
+  Content-Type = "application/xml; charset=utf-8"
+  Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
 for = "/sitemap.xml"
