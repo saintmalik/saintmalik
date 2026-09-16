@@ -460,6 +460,14 @@ const MODAL_HTML = `
 
 const LG_FILTER = `<svg class="lg-filter" aria-hidden="true" focusable="false"><filter id="lg" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.0028 0.0055" numOctaves="1" seed="92" result="noise"/><feGaussianBlur in="noise" stdDeviation="4.5" result="soft"/><feDisplacementMap in="SourceGraphic" in2="soft" scale="230" xChannelSelector="R" yChannelSelector="G" result="dispR"/><feColorMatrix in="dispR" type="matrix" result="chanR" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/><feDisplacementMap in="SourceGraphic" in2="soft" scale="185" xChannelSelector="R" yChannelSelector="G" result="dispG"/><feColorMatrix in="dispG" type="matrix" result="chanG" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"/><feDisplacementMap in="SourceGraphic" in2="soft" scale="140" xChannelSelector="R" yChannelSelector="G" result="dispB"/><feColorMatrix in="dispB" type="matrix" result="chanB" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/><feBlend in="chanR" in2="chanG" mode="screen" result="rg"/><feBlend in="rg" in2="chanB" mode="screen"/></filter></svg>`;
 
+function injectClarity() {
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "rb5lzwkxst");
+}
+
 function boot() {
   if (!document.getElementById("lg")) {
     document.body.insertAdjacentHTML("afterbegin", LG_FILTER);
@@ -484,4 +492,5 @@ function boot() {
   if (document.body.dataset.page === "resume") openResumeModal();
 }
 
+injectClarity();
 document.addEventListener("DOMContentLoaded", boot);
