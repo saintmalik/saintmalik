@@ -1049,6 +1049,7 @@ body[data-page="home"] .write-date {
   z-index: 51;
   margin-top: 48px;
   padding-bottom: env(safe-area-inset-bottom, 0px);
+  overflow: visible;
 }
 
 .footer-row {
@@ -1060,7 +1061,9 @@ body[data-page="home"] .write-date {
   border-top: 1px solid var(--rule);
   padding: 20px 0 0;
   position: relative;
-  z-index: 2;
+  z-index: 5;
+  overflow: visible;
+  pointer-events: auto;
 }
 
 .footer-links {
@@ -1094,7 +1097,9 @@ body[data-page="home"] .write-date {
   gap: 14px;
   flex-shrink: 0;
   position: relative;
-  z-index: 2;
+  z-index: 6;
+  overflow: visible;
+  pointer-events: auto;
 }
 
 .skyline {
@@ -1212,8 +1217,10 @@ html[data-theme="dark"] .glass::after {
   color: var(--ink-faint);
   background: none;
   border: 0;
-  padding: 0 8px;
-  margin: 0 -8px;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 12px;
+  margin: 0 -12px;
   min-height: 44px;
   min-width: 44px;
   display: inline-flex;
@@ -1222,14 +1229,17 @@ html[data-theme="dark"] .glass::after {
   cursor: pointer;
   touch-action: manipulation;
   position: relative;
-  z-index: 2;
+  z-index: 10;
+  pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-select: none;
 }
 
-.theme-toggle:hover {
-  color: var(--gold);
+@media (hover: hover) {
+  .theme-toggle:hover {
+    color: var(--gold);
+  }
 }
 
 body.modal-open {

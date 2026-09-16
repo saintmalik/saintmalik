@@ -62,14 +62,38 @@ function currentPath() {
 
 function applyTheme(theme) {
   const next = theme === "light" ? "light" : "dark";
-  document.documentElement.dataset.theme = next;
-  localStorage.setItem("theme", next);
+  document.documentElement.setAttribute("data-theme", next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch (_) {}
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute("content", next === "light" ? "#f8f4ea" : "#050505");
   document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
     btn.textContent = next === "light" ? "black" : "white";
+    btn.setAttribute("aria-pressed", next === "light" ? "true" : "false");
     btn.setAttribute("aria-label", next === "light" ? "switch to black mode" : "switch to white mode");
   });
+}
+
+function toggleTheme() {
+  const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+  applyTheme(next);
+}
+
+function bindThemeToggle() {
+  let last = 0;
+  const onToggle = (event) => {
+    const node = event.target && event.target.nodeType === 3 ? event.target.parentElement : event.target;
+    const btn = node && node.closest && node.closest("[data-theme-toggle]");
+    if (!btn) return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    const now = performance.now();
+    if (now - last < 400) return;
+    last = now;
+    toggleTheme();
+  };
+  document.addEventListener("pointerup", onToggle);
+  document.addEventListener("click", onToggle);
 }
 
 function markActiveNav() {
@@ -374,7 +398,7 @@ async function initOpenSource() {
   }
 }
 
-const WRITING_FEED = "/blog-feed.xml";
+const WRITING_FEED = "https://blog.saintmalik.me/rss.xml";
 const WRITING_LIMIT = 2;
 
 function formatWritingDate(value) {
@@ -479,13 +503,12 @@ function boot() {
     document.body.insertAdjacentHTML("beforeend", MODAL_HTML);
   }
   markActiveNav();
-  applyTheme(document.documentElement.dataset.theme || localStorage.getItem("theme") || "dark");
-  document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
-      applyTheme(next);
-    });
-  });
+  let saved = "dark";
+  try {
+    saved = localStorage.getItem("theme") || document.documentElement.getAttribute("data-theme") || "dark";
+  } catch (_) {}
+  applyTheme(saved);
+  bindThemeToggle();
   bindResumeModal();
   tickClock();
   setInterval(tickClock, 30000);

@@ -1,17 +1,9 @@
-# Cloudflare Pages / Workers static assets.
-# 200 = rewrite (URL bar stays). 301/302 would change the path and look like a "redirect to home".
-# https://developers.cloudflare.com/workers/static-assets/redirects/
+# Cloudflare Pages already serves talks.html at /talks (pretty URLs).
+# Do not 200-rewrite /talks → /talks.html — that loops with Pages' .html → pretty 308.
+# https://developers.cloudflare.com/pages/configuration/redirects/
 
-/talks /talks.html 200
-/open-source /open-source.html 200
-/projects /projects.html 200
-/resume /resume.html 200
 /favicon.ico /assets/favicon.ico 200
 /oss.json /assets/oss.json 200
-
-# Cloudflare cannot 200-proxy an external host; this may fall through as a redirect.
-# Home JS fetches /blog-feed.xml same-origin (see site.js).
-/blog-feed.xml https://blog.saintmalik.me/rss.xml 200
 
 /posts/ https://blog.saintmalik.me 301
 /posts https://blog.saintmalik.me 301
