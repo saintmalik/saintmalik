@@ -1,3 +1,18 @@
+# OSS list is assets/oss.json (GitHub Action refreshes it).
+
+[build]
+  command = "true"
+
+[[redirects]]
+from = "/favicon.ico"
+to = "/assets/favicon.ico"
+status = 200
+
+[[redirects]]
+from = "/oss.json"
+to = "/assets/oss.json"
+status = 200
+
 [[redirects]]
 from = "/posts/"
 to = "https://blog.saintmalik.me"
@@ -15,3 +30,50 @@ from = "/blog/"
 to = "https://blog.saintmalik.me"
 status = 301
 force = true
+
+[[redirects]]
+from = "/open-source"
+to = "/open-source.html"
+status = 200
+
+[[redirects]]
+from = "/resume"
+to = "/resume.html"
+status = 200
+
+[[redirects]]
+from = "/projects"
+to = "/projects.html"
+status = 200
+
+[[redirects]]
+from = "/talks"
+to = "/talks.html"
+status = 200
+
+[[headers]]
+for = "/*"
+  [headers.values]
+  Link = "</llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+
+[[headers]]
+for = "/llms.txt"
+  [headers.values]
+  Content-Type = "text/plain; charset=utf-8"
+  Link = "</llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+
+[[headers]]
+for = "/llms-full.txt"
+  [headers.values]
+  Content-Type = "text/plain; charset=utf-8"
+  Link = "</llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+
+[[headers]]
+for = "/sitemap.xml"
+  [headers.values]
+  Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+for = "/robots.txt"
+  [headers.values]
+  Content-Type = "text/plain; charset=utf-8"

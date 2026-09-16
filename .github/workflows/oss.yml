@@ -1,0 +1,203 @@
+name: Refresh OSS snapshot
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "assets/oss.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oss-snapshot
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh oss.json
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import json
+          import subprocess
+          from pathlib import Path
+
+          OUT = Path("assets/oss.json")
+          SKIP_PREFIXES = ("saintmalik/", "threatmind-inc/", "threatmind/")
+
+
+          def gh_search(kind: str, extra: list[str] | None = None) -> list[dict]:
+              search_kind = "prs" if kind == "pr" else "issues"
+              cmd = [
+                  "gh",
+                  "search",
+                  search_kind,
+                  "is:public",
+                  "--author",
+                  "saintmalik",
+                  "--visibility",
+                  "public",
+                  "--sort",
+                  "created",
+                  "--order",
+                  "desc",
+                  "--limit",
+                  "1000",
+                  "--json",
+                  "repository,title,url,number,state,createdAt",
+              ]
+              if extra:
+                  cmd.extend(extra)
+              result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+              return json.loads(result.stdout)
+
+
+          def keep_repo(repo: str) -> bool:
+              lower = repo.lower()
+              if "threatmind" in lower:
+                  return False
+              return not any(lower.startswith(prefix) for prefix in SKIP_PREFIXES)
+
+
+          def normalize(item: dict, kind: str) -> dict | None:
+              repo = ((item.get("repository") or {}).get("nameWithOwner") or "").strip()
+              if not repo or not keep_repo(repo):
+                  return None
+              html = item.get("url") or ""
+              if kind == "issue" and "/pull/" in html:
+                  return None
+              state = (item.get("state") or "open").lower()
+              merged = False
+              if kind == "pr":
+                  if state == "merged":
+                      merged = True
+                      state = "closed"
+                  elif state == "open":
+                      merged = False
+                  else:
+                      # Closed without merge (rejected / abandoned).
+                      return None
+              return {
+                  "repo": repo,
+                  "title": item.get("title") or "",
+                  "html": html,
+                  "number": item.get("number"),
+                  "kind": kind,
+                  "state": "open" if state == "open" else "closed",
+                  "merged": merged,
+                  "created": item.get("createdAt") or "",
+                  "body": "",
+              }
+
+
+          def load_repo_meta(repos: list[str]) -> tuple[dict[str, int], set[str]]:
+              stars: dict[str, int] = {}
+              private: set[str] = set()
+              unique = sorted(set(repos))
+              if not unique:
+                  return stars, private
+              chunks = [unique[i : i + 40] for i in range(0, len(unique), 40)]
+              for chunk in chunks:
+                  fields = []
+                  for idx, repo in enumerate(chunk):
+                      owner, name = repo.split("/", 1)
+                      fields.append(
+                          f'r{idx}: repository(owner: "{owner}", name: "{name}") {{ stargazerCount isPrivate }}'
+                      )
+                  query = "query { " + " ".join(fields) + " }"
+                  result = subprocess.run(
+                      ["gh", "api", "graphql", "-f", f"query={query}"],
+                      capture_output=True,
+                      text=True,
+                  )
+                  if result.returncode != 0:
+                      continue
+                  data = json.loads(result.stdout).get("data") or {}
+                  for idx, repo in enumerate(chunk):
+                      node = data.get(f"r{idx}") or {}
+                      if node.get("isPrivate"):
+                          private.add(repo)
+                          continue
+                      if "stargazerCount" in node:
+                          stars[repo] = int(node["stargazerCount"])
+              return stars, private
+
+
+          def collect(kind: str, extra: list[str] | None = None) -> list[dict]:
+              rows = []
+              for raw in gh_search(kind, extra):
+                  row = normalize(raw, kind)
+                  if row:
+                      rows.append(row)
+              return rows
+
+
+          def main() -> None:
+              items = []
+              seen = set()
+              raw_rows = (
+                  collect("pr", ["--merged"])
+                  + collect("pr", ["--state", "open"])
+                  + collect("pr", ["--owner", "flutter", "--merged"])
+                  + collect("pr", ["--owner", "flutter", "--state", "open"])
+                  + collect("pr", ["--owner", "dart-lang", "--merged"])
+                  + collect("pr", ["--owner", "dart-lang", "--state", "open"])
+                  + collect("issue")
+              )
+              for row in raw_rows:
+                  key = (row["kind"], row["repo"], row["number"])
+                  if key in seen:
+                      continue
+                  seen.add(key)
+                  items.append(row)
+
+              stars, private = load_repo_meta([row["repo"] for row in items])
+              if private:
+                  items = [row for row in items if row["repo"] not in private]
+                  stars = {repo: count for repo, count in stars.items() if repo not in private}
+
+              items.sort(key=lambda row: row["created"], reverse=True)
+              payload = {
+                  "stars": stars,
+                  "items": items,
+              }
+              OUT.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
+              flutter = [
+                  row
+                  for row in items
+                  if row["repo"].startswith("flutter/") or row["repo"].startswith("dart-lang/")
+              ]
+              print(
+                  f"wrote {OUT} ({len(items)} items, {len(payload['stars'])} repos, "
+                  f"{len(flutter)} flutter/dart, dropped {len(private)} private repos)"
+              )
+
+
+          if __name__ == "__main__":
+              main()
+          PY
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/oss.json
+          if git diff --staged --quiet; then
+            echo "oss.json unchanged"
+            exit 0
+          fi
+          git commit -m "chore: refresh oss snapshot"
+          git push

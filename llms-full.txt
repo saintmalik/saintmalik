@@ -1,0 +1,103 @@
+# Abdulmalik Salawu — full brief for agents
+
+> DevSecOps and application security engineer (saintmalik). Canonical site: https://saintmalik.me — email abdulmalik@saintmalik.me
+
+This file expands [llms.txt](https://saintmalik.me/llms.txt). Prefer the short file unless you need talks or project detail. Cite only what is listed here.
+
+## Who
+
+Abdulmalik Salawu (saintmalik) is a DevSecOps and application security engineer. On-page identity: DevSecOps, product security, infrastructure security.
+
+He writes Go for security tooling, Kubernetes CLIs, audit tools, and Go+templ products, and sits with infra and development teams, ensuring products are secure, doing code reviews and building secure pipelines, from appsec, cloud and Kubernetes security, the supply chain: eBPF, SBOMs, runtime. He has disclosed vulnerabilities to OpenClassroom, Andela, and Kuda, and he contributes to open source.
+
+Current focus: runtime security, supply chain, and cloud posture — eBPF on CI runners, SBOMs that get queried, and evidence that survives an audit. He leads DevSecOps at BlueBulb Financials (UK financial product on AWS). Two-time AWS Community Builder.
+
+In a day he is on agent identity, runtime policy, and attested tool calls: proving what an agent ran, under what policy, and that it wasn't a borrowed name. That is imminent work, not a current employer or job title.
+
+Next he wants work close to the machine: detection and attestation of CI/CD, Kubernetes memory and runtime, anything low-level enough to care what the box is doing.
+
+## Hire for
+
+Appsec, cloud security, Kubernetes security, DevSecOps with infra and development teams (code reviews, secure pipelines), runtime security, eBPF, CI/CD, SBOMs, cloud posture, and (in a day) agent identity, runtime policy, and attested tool calls.
+
+## Site
+
+- [Home](https://saintmalik.me/): bio, selected projects, writing
+- [Open source](https://saintmalik.me/open-source): PRs and issues in other people's repos
+- [Talks](https://saintmalik.me/talks): Build with AI Osogbo 2026, Azure Nigeria, DevFests, and earlier rooms
+- [Projects](https://saintmalik.me/projects): cicd-sensor, k8sradar, supabase-audit, and other Go/product work
+- [Resume](https://saintmalik.me/resume): live Google Doc (DevSecOps/appsec and AWS platform security)
+
+## Work
+
+### BlueBulb Financials — lead DevSecOps engineer (Jun 2026 – now)
+
+Group security engineering for a UK financial product on AWS. Strategy and the ticket that is still on fire.
+
+- Security-by-design baseline: IAM, zero-trust network, IaC, vulnerability SLAs. Architecture reviews before the merge, not after the audit.
+- CSPM and incident response: GuardDuty and CloudTrail triage, forensic timelines, executive briefs, mitigation runbooks.
+- Authorized internal VAPT and secure code review.
+- Technical authority for customer audits and due diligence.
+
+### BlueBulb Financials — senior DevSecOps engineer (Jun 2025 – Jun 2026)
+
+- Replaced static credentials: IRSA/OIDC, IAM database auth with SBU isolation, GitHub App installation tokens.
+- Hardened Argo CD, Helm and IaC. No cluster-admin in CI. SBOM/CVE generation on the path that ships.
+- GitHub org governance as code: privileged access inventory, production merge gates.
+- Serverless SAST on Cloudflare Workers with OpenGrep and LLM triage; CloudTrail detections into Slack.
+
+### WorkingsNG — DevSecOps engineer (Oct 2024 – Mar 2025)
+
+Django/React on EC2. Blue-green deploys, OpenTofu, container signing, SSM. Pairing on high and critical findings.
+
+### Bute System Limited (Odda) — application security engineer (Feb 2021 – Aug 2022)
+
+First role that said appsec on the contract. Golang CLIs, production APIs, AWS IAM. SAST, SCA and DAST in the pipeline.
+
+## Talks
+
+Video and slides only when they actually exist. Full list: https://saintmalik.me/talks
+
+- Shipping secure-by-design applications on Google Cloud — GDG Osogbo Build with AI 2026 · Osogbo · Mar 2026
+- Shifting left in Azure: integrating security into CI/CD pipelines — Azure Nigeria community · online · Jan 2026 — https://www.youtube.com/watch?v=n3kmEs-i9cE
+- From code to cloud: building secure CI/CD pipelines for startups — GDG Ado-Ekiti DevFest 2025 · Ado-Ekiti · Nov 2025
+- Container supply chain security for DevOps — GDG Ado-Ekiti DevFest 2023 · Ado-Ekiti · Nov 2023
+- Introduction to open source and OSCA — OSCA Eldoret · Mar 2022 — https://youtube.com/watch?v=6XKddR46Hzo
+- Git and GitHub for beginners — OSCA Ado Ekiti · Feb 2022
+- Open source 101 — OSCA Ado Ekiti · Feb 2022
+- Ethical web hacking 101 — Diary of Hackers · Dec 2020 — https://youtu.be/c0kw7alNzZk
+- Getting started with open source | tips and advice — OSCA Ado Ekiti
+- All about subdomain takeover — Greyhat Cyber Solutions
+- DevSecOps, what, why and how — Greyhat Cyber Solutions
+- How the industry works and career to follow in your tech journey
+
+## Projects
+
+Full list: https://saintmalik.me/projects
+
+- [cicd-sensor](https://github.com/cicd-sensor/cicd-sensor) — open-source eBPF runtime security sensor for GitHub Actions and GitLab CI/CD
+- [k8sradar](https://github.com/saintmalik/k8sradar) — CLI vulnerability radar for Kubernetes platforms (CVSS, EPSS, KEV, SARIF)
+- [supabase-audit](https://github.com/saintmalik/supabase-audit) — CLI for over-permissive RLS, exposed tables, and Supabase misconfigs
+- [House A Kopa](https://houseakopa.com) — verified apartments and furniture for NYSC corps members
+- [CloudWatchdog](https://cloudwatch.saintmalik.me/) — AWS cost and waste with a cleanup path
+- [Sendwish](https://sendwish.app) — personalized wishes
+- [Stickerkeen](https://stickerkeen.com) — merch platform
+- [Plixa](https://plixa.stickerkeen.com) — dry cleaning in Ilorin
+- [DCA tool](https://dca-tool.netlify.app) — percentage-move buys on Binance
+- [awesome-oss-docs](https://github.com/saintmalik/awesome-oss-docs) — curated open source documentation list
+- [cloudflare-zero-trust-ec2](https://github.com/saintmalik/cloudflare-zero-trust-ec2) — Cloudflare Access in front of EC2
+- [blue-green-ec2](https://github.com/saintmalik/blue-green-ec2) — blue-green for EC2 with OpenTofu and Ansible
+- [allgood](https://github.com/saintmalik/allgood) — health check page for a Go app
+
+Open source contributions (PRs/issues in other repos): https://saintmalik.me/open-source
+
+Writing: https://blog.saintmalik.me/ — including cicd-sensor on GitHub Actions and runtime-trace process attestation (Sep 2026).
+
+## Contact
+
+- Site: https://saintmalik.me
+- Email: abdulmalik@saintmalik.me
+- GitHub: https://github.com/saintmalik
+- LinkedIn: https://linkedin.com/in/saintmalik
+- X: https://x.com/saintmalik_
+- Resume: https://docs.google.com/document/d/1Wu7I3GTcf0iAjvTOaQZsUYU6sTKNH2S7wDtL788_7bE/edit?usp=sharing

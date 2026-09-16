@@ -1,404 +1,247 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Abdulmalik Salawu">
-    <title>Abdulmalik Salawu - Application Security Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --background: #000000;
-            --muted: #888888;
-            --accent: #ffffff;
-        }
-
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--background);
-            color: var(--accent);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .grain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.03;
-            z-index: 1000;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 80px 40px;
-            position: relative;
-        }
-
-        .cursor-glow {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
-
-        header {
-            margin-bottom: 80px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-
-        .profile-section {
-            flex: 1;
-        }
-
-        .profile-image-wrapper {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            flex-shrink: 0;
-        }
-
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent);
-            transition: transform 0.5s ease, border-color 0.3s ease;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.05);
-            border-color: var(--muted);
-        }
-
-        .profile-image-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent), transparent);
-            opacity: 0.1;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--muted) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--muted);
-            font-weight: 400;
-            margin-bottom: 24px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            padding: 8px 12px;
-            border: 1px solid transparent;
-            border-radius: 6px;
-        }
-
-        .social-link:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--muted), transparent);
-            margin: 40px 0;
-            opacity: 0.3;
-        }
-
-        section {
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease-out;
-            animation-fill-mode: both;
-        }
-
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.4s; }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            display: inline-block;
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        p {
-            color: var(--muted);
-            margin-bottom: 16px;
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--muted);
-        }
-
-        a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        a:hover::after {
-            width: 100%;
-        }
-
-        ul {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 12px;
-            margin-top: 20px;
-            margin-bottom: 24px;
-        }
-
-        li {
-            color: var(--muted);
-            font-size: 0.9rem;
-            padding: 12px 16px;
-            border: 1px solid rgba(136, 136, 136, 0.2);
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        li:hover {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(4px);
-        }
-
-        li::before {
-            content: '▹';
-            color: var(--accent);
-            margin-right: 12px;
-            font-weight: bold;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.2;
-                transform: scale(1.05);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 24px;
-            }
-
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 30px;
-            }
-
-            .profile-image-wrapper {
-                order: -1;
-                width: 180px;
-                height: 180px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-
-            ul {
-                grid-template-columns: 1fr;
-            }
-
-            h2 {
-                font-size: 1.3rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=3.0">
+  <title>Abdulmalik Salawu - eBPF, containers, Kubernetes &amp; security</title>
+  <meta name="description" content="Abdulmalik Salawu (saintmalik) writes Go for security tooling, Kubernetes CLIs, audit tools, and Go+templ products, and sits with infra and development teams on code reviews and secure pipelines — from appsec, cloud and Kubernetes security, the supply chain: eBPF, SBOMs, runtime. Lead DevSecOps at BlueBulb Financials. 2x AWS Community Builder.">
+  <meta name="author" content="Abdulmalik Salawu">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png?v=2">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2" sizes="any">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=2">
+  <link rel="manifest" href="/assets/site.webmanifest?v=2">
+  <link rel="canonical" href="https://saintmalik.me/">
+  <link rel="author" href="https://saintmalik.me/">
+  <link rel="describedby" href="https://saintmalik.me/llms.txt" type="text/plain">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Abdulmalik Salawu - eBPF, containers, Kubernetes &amp; security">
+  <meta property="og:url" content="https://saintmalik.me/">
+  <meta property="og:image" content="https://saintmalik.me/assets/abdulmalik.png">
+  <meta property="og:site_name" content="Abdulmalik Salawu - eBPF, containers, Kubernetes &amp; security">
+  <meta property="og:description" content="Abdulmalik Salawu (saintmalik) writes Go for security tooling, Kubernetes CLIs, audit tools, and Go+templ products, and sits with infra and development teams on code reviews and secure pipelines — from appsec, cloud and Kubernetes security, the supply chain: eBPF, SBOMs, runtime. Lead DevSecOps at BlueBulb Financials. 2x AWS Community Builder.">
+  <meta property="profile:first_name" content="Abdulmalik">
+  <meta property="profile:last_name" content="Salawu">
+  <meta property="profile:username" content="saintmalik">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Abdulmalik Salawu - eBPF, containers, Kubernetes &amp; security">
+  <meta name="twitter:description" content="Abdulmalik Salawu (saintmalik) writes Go for security tooling, Kubernetes CLIs, audit tools, and Go+templ products, and sits with infra and development teams on code reviews and secure pipelines — from appsec, cloud and Kubernetes security, the supply chain: eBPF, SBOMs, runtime. Lead DevSecOps at BlueBulb Financials. 2x AWS Community Builder.">
+  <meta name="twitter:image" content="https://saintmalik.me/assets/abdulmalik.png">
+  <meta name="twitter:creator" content="@saintmalik_">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": "https://saintmalik.me/#profile",
+        "url": "https://saintmalik.me/",
+        "name": "Abdulmalik Salawu",
+        "isPartOf": { "@id": "https://saintmalik.me/#website" },
+        "about": { "@id": "https://saintmalik.me/#person" },
+        "mainEntity": { "@id": "https://saintmalik.me/#person" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://saintmalik.me/#website",
+        "url": "https://saintmalik.me/",
+        "name": "Abdulmalik Salawu",
+        "alternateName": "saintmalik",
+        "description": "eBPF, containers, Kubernetes & security — DevSecOps, product security, infrastructure security, and the software supply chain.",
+        "publisher": { "@id": "https://saintmalik.me/#person" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://saintmalik.me/#person",
+        "name": "Abdulmalik Salawu",
+        "alternateName": ["saintmalik", "Abdulmalik"],
+        "url": "https://saintmalik.me/",
+        "image": "https://saintmalik.me/assets/abdulmalik.png",
+        "email": "mailto:abdulmalik@saintmalik.me",
+        "jobTitle": "Lead DevSecOps Engineer",
+        "description": "Abdulmalik Salawu (saintmalik) writes Go for security tooling, Kubernetes CLIs, audit tools, and Go+templ products, and sits with infra and development teams, ensuring products are secure, doing code reviews and building secure pipelines, from appsec, cloud and Kubernetes security, the supply chain: eBPF, SBOMs, runtime. He leads DevSecOps at BlueBulb Financials and is a two-time AWS Community Builder. In a day he is on agent identity, runtime policy, and attested tool calls.",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "BlueBulb Financials"
+        },
+        "knowsAbout": [
+          "eBPF",
+          "containers",
+          "Kubernetes",
+          "application security",
+          "cloud security",
+          "Kubernetes security",
+          "DevSecOps",
+          "software supply chain security",
+          "CI/CD security",
+          "SBOMs",
+          "cloud security posture",
+          "runtime security",
+          "agent identity"
+        ],
+        "award": "AWS Community Builder (2x)",
+        "memberOf": {
+          "@type": "Organization",
+          "name": "AWS Community Builders"
+        },
+        "sameAs": [
+          "https://github.com/saintmalik",
+          "https://linkedin.com/in/saintmalik",
+          "https://x.com/saintmalik_",
+          "https://blog.saintmalik.me/"
+        ]
+      }
+    ]
+  }
+  </script>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+      } catch (e) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=type5">
 </head>
-<body>
-    <div class="grain"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
-    
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <div class="profile-section">
-                    <h1>Abdulmalik Salawu</h1>
-                    <p class="subtitle">AppSec/DevSecOps Engineer</p>
-                    <div class="social-links">
-                        <a href="https://linkedin.com/in/saintmalik" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="mailto:abdulmalik@saintmalik.me" class="social-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>Email</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="profile-image-wrapper">
-                    <img src="assets/abdulmalik.JPG" alt="Abdulmalik Salawu" class="profile-image">
-                </div>
-            </div>
-        </header>
+<body data-page="home">
+  <div class="shell">
+    <nav class="site-nav glass" id="site-nav">
+      <ul>
+        <li><a href="/" data-nav="/"><span class="kbd">[h]</span><span>home</span><span class="bar"></span></a></li>
+        <li><a href="/open-source" data-nav="/open-source"><span class="kbd">[o]</span><span>open source</span><span class="bar"></span></a></li>
+        <li><a href="/talks" data-nav="/talks"><span class="kbd">[t]</span><span>talks</span><span class="bar"></span></a></li>
+        <li><a href="/projects" data-nav="/projects"><span class="kbd">[p]</span><span>projects</span><span class="bar"></span></a></li>
+        <li class="resume"><button class="nav-resume" type="button" data-resume-open><span class="kbd">[r]</span><span>resume</span></button></li>
+      </ul>
+    </nav>
+    <main>
+      <header class="identity">
+        <div>
+          <h1>abdulmalik</h1>
+          <p class="roles">
+            <span>devsecops</span>
+            <span>product security</span>
+            <span>infrastructure security</span>
+          </p>
+        </div>
+        <img src="/assets/abdulmalik.png" alt="Abdulmalik Salawu">
+      </header>
 
-        <div class="divider"></div>
+      <div class="prose">
+        <p>i write golang for security tooling, kubernetes clis, audit tools and go+templ products, and i sit with the infra and development teams, ensuring products are secure, doing code reviews and building secure pipelines, from appsec, cloud and kubernetes security, the supply chain: ebpf, sboms, runtime. i've disclosed vulns to openclassroom, andela and kuda, and i contribute to <a href="/open-source">open source</a>.</p>
+        <p>right now i'm in runtime security, supply chain and cloud posture: ebpf on ci runners, sboms that get queried, and the evidence that survives an audit. i lead devsecops at bluebulb financials. 2x aws community builder.</p>
+        <p>in a day i'm on agent identity, runtime policy and attested tool calls: proving what an agent ran, under what policy, and that it wasn't a borrowed name. next i want work that's close to the machine — detection and attestation of ci/cd, kubernetes memory and runtime, anything low-level enough to care what the box is doing. i still ship <a href="/projects">products</a> from lived experience, and i <a href="https://blog.saintmalik.me/" target="_blank" rel="noreferrer">write</a>.</p>
+      </div>
 
-        <section>
-            <h2>About</h2>
-            <p>I'm an Engineer who excels across various roles, from Application Security to DevSecOps, and DevOps. I excel at securing digital ecosystems and simplifying complex challenges.</p>
-            <p>In the past, I've responsibly disclosed security vulnerabilities to companies like OpenClassroom, Andela, and Kuda. I'm passionate about building backend side projects with Golang and contributing to open source projects, see my contributions <a href="https://ossrank.com/c/191264-saintmalik" target="_blank">here</a>.</p>
-            <p>Here are some technologies I've worked with:</p>
-            <ul>
-                <li>CI/CD pipelines (Gitlab, Github Actions)</li>
-                <li>Kubernetes/Docker</li>
-                <li>Golang/Bash</li>
-                <li>Infrastructure as Code (Terraform, Ansible)</li>
-                <li>HashiCorp Vault/Azure Vault/AWS Parameter Store</li>
-                <li>SAST tools like Semgrep</li>
-            </ul>
-            <p>I enjoy spending my free time on reading new security digest, exploits and infrastructure tooling, and I build <a href="/projects">products</a>, which are birthed from my own personal experience.</p>
-            <p>Check out my <a href="https://blog.saintmalik.me/" target="_blank">blog</a> for technical insights and occasional rants.</p>
-        </section>
+      <section class="section">
+        <div class="section-head">
+          <h2>projects</h2>
+          <a class="see-all" href="/projects">see all →</a>
+        </div>
+        <ul class="item-list">
+          <li>
+            <a class="block" href="https://github.com/cicd-sensor/cicd-sensor" target="_blank" rel="noreferrer">
+              <div class="item-title-row">
+                <h3>cicd-sensor<span class="slash"> // edr for github actions. the job is the attack surface.</span></h3>
+                <span class="tags">go · ebpf · ci/cd</span>
+              </div>
+              <p>open-source ebpf runtime security sensor for github actions and gitlab ci. artifact signing and pinned shas matured. runtime insight into the runner itself lagged behind.</p>
+            </a>
+          </li>
+          <li>
+            <a class="block" href="https://github.com/saintmalik/k8sradar" target="_blank" rel="noreferrer">
+              <div class="item-title-row">
+                <h3>k8sradar<span class="slash"> // what's known about the cluster you actually run, not the one in the docs.</span></h3>
+                <span class="tags">go · kubernetes · vuln intel</span>
+              </div>
+              <p>you put in provider, kubernetes version, add-ons, node os. you get exploitability, kev, and the version that closes it. built for the moment someone from leadership asks if you are exposed to the thing on the news.</p>
+            </a>
+          </li>
+          <li>
+            <a class="block" href="https://github.com/saintmalik/supabase-audit" target="_blank" rel="noreferrer">
+              <div class="item-title-row">
+                <h3>supabase-audit<span class="slash"> // rls that looks locked until you actually query it.</span></h3>
+                <span class="tags">go · postgres</span>
+              </div>
+              <p>cli that finds over-permissive row level security, exposed tables, and the supabase misconfigs that keep showing up in assessments.</p>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>writing</h2>
+          <a class="see-all" href="https://blog.saintmalik.me/" target="_blank" rel="noreferrer">see all →</a>
+        </div>
+        <ul class="item-list">
+          <li>
+            <a class="write-row" href="https://blog.saintmalik.me/cicd-sensor-github-actions/" target="_blank" rel="noreferrer">
+              <span>Think EDR, but for CI/CD: cicd-sensor on GitHub Actions</span>
+              <span class="write-date">Sep 12, 2026</span>
+            </a>
+          </li>
+          <li>
+            <a class="write-row" href="https://blog.saintmalik.me/runtime-trace-process-attestation/" target="_blank" rel="noreferrer">
+              <span>Runtime Trace attestation: signed image, dishonest process</span>
+              <span class="write-date">Sep 12, 2026</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-row">
+        <nav class="footer-links">
+          <a href="https://github.com/saintmalik" target="_blank" rel="noreferrer">github</a>
+          <a href="https://x.com/saintmalik_" target="_blank" rel="noreferrer">x</a>
+          <a href="https://linkedin.com/in/saintmalik" target="_blank" rel="noreferrer">linkedin</a>
+          <a href="mailto:abdulmalik@saintmalik.me">email</a>
+        </nav>
+        <span class="footer-end">
+          <span class="clock" id="clock"></span>
+          <button class="theme-toggle" type="button" data-theme-toggle>white</button>
+        </span>
+      </div>
+      <div class="skyline" aria-hidden="true">
+        <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+          <path d="M0 140 L0 92 C120 80 180 48 280 58 C390 70 430 30 540 42 C650 54 700 18 820 36 C940 54 980 22 1100 44 C1220 66 1280 50 1440 62 L1440 140 Z"/>
+          <path opacity="0.6" d="M0 140 L0 108 C160 96 220 78 340 88 C470 100 520 70 640 82 C760 94 820 64 960 80 C1100 96 1180 74 1440 90 L1440 140 Z"/>
+        </svg>
+      </div>
+    </footer>
+  </div>
+  <div class="resume-modal" id="resume-modal" hidden>
+    <div class="resume-modal-backdrop" data-resume-close></div>
+    <div class="resume-sheet" role="dialog" aria-modal="true" aria-labelledby="resume-title">
+      <div class="resume-sheet-head">
+        <div>
+          <h2 id="resume-title">resume</h2>
+          <p>same record, different things leading. pick whichever role you are hiring for.</p>
+        </div>
+        <button class="resume-close" type="button" data-resume-close aria-label="close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="resume-roles-wrap">
+        <ul class="resume-roles"></ul>
+      </div>
+      <div class="resume-actions-row">
+        <a class="btn-gold" id="resume-open" target="_blank" rel="noreferrer">open pdf</a>
+        <a class="btn" id="resume-download">download</a>
+        <a class="mail" href="mailto:abdulmalik@saintmalik.me">or just email me →</a>
+      </div>
     </div>
-
-    <script>
-        // Cursor glow effect
-        const cursorGlow = document.getElementById('cursorGlow');
-        let mouseX = 0, mouseY = 0;
-        let glowX = 0, glowY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animate() {
-            glowX += (mouseX - glowX) * 0.1;
-            glowY += (mouseY - glowY) * 0.1;
-            cursorGlow.style.left = glowX + 'px';
-            cursorGlow.style.top = glowY + 'px';
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // Fade in on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+  </div>
+  <script src="site.js"></script>
 </body>
 </html>
