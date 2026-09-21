@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=type16">
+  <link rel="stylesheet" href="styles.css?v=type20">
 </head>
 <body data-page="projects">
   <div class="shell">
@@ -70,126 +70,9 @@
       <div class="page-kicker">
         <h1 class="page-title">projects</h1>
       </div>
-      <p class="page-lede">mine, so nobody reviewed them. the work other people had to accept is on <a class="link" href="/open-source">open source</a>.</p>
 
-      <ul class="item-list">
-        <li>
-          <a class="block" href="https://github.com/cicd-sensor/cicd-sensor" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>cicd-sensor</h3>
-              <span class="tags">go · ebpf · ci/cd</span>
-            </div>
-            <p>open-source ebpf runtime security sensor for github actions and gitlab ci/cd. looks at what the runner actually does while secrets are in memory, not at whether the yaml looks clean.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://github.com/saintmalik/k8sradar" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>k8sradar</h3>
-              <span class="tags">go · kubernetes · osv</span>
-            </div>
-            <p>cli vulnerability radar for kubernetes platforms and generic software assets. cvss, epss, kev, sarif out, fail-on in ci. modelled on grype, pointed at the stack you typed in, not a generic benchmark.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://github.com/saintmalik/supabase-audit" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>supabase-audit</h3>
-              <span class="tags">go · postgres</span>
-            </div>
-            <p>cli that finds over-permissive row level security, exposed tables, and the supabase misconfigs that keep showing up in assessments.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://houseakopa.com" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>house a kopa</h3>
-              <span class="tags">go · product</span>
-            </div>
-            <p>verified apartments, cheaper furniture, and a way for nysc corps members to actually move cities without getting scammed on day one.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://cloudwatch.saintmalik.me/" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>cloudwatchdog</h3>
-              <span class="tags">go · aws</span>
-            </div>
-            <p>aws cost and waste, with a cleanup path. unused resources, spend breakdown, slack when something starts leaking money.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://sendwish.app" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>sendwish</h3>
-              <span class="tags">go · product</span>
-            </div>
-            <p>personalized wishes that are not a template with a name swapped in. built because the existing ones were.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://stickerkeen.com" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>stickerkeen</h3>
-              <span class="tags">next.js · nuxt</span>
-            </div>
-            <p>merch platform for creating, managing, and distributing product across africa.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://plixa.stickerkeen.com" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>plixa</h3>
-              <span class="tags">go · vue</span>
-            </div>
-            <p>dry cleaning in ilorin with pickup at the door. also the name of an older payments experiment that did not want receipts to vanish.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://dca-tool.netlify.app" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>dca tool</h3>
-              <span class="tags">go · binance</span>
-            </div>
-            <p>buys the asset you already decided on, when the market moves by the percentage you set. no new thesis at 2am.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://github.com/saintmalik/awesome-oss-docs" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>awesome oss docs</h3>
-              <span class="tags">docs · javascript</span>
-            </div>
-            <p>curated list of open source documentation for people who actually want to contribute to docs. still the repo with the most stars, which tells you something about the work that compounds.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://github.com/saintmalik/cloudflare-zero-trust-ec2" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>cloudflare zero trust ec2</h3>
-              <span class="tags">terraform · opentofu</span>
-            </div>
-            <p>zero trust in front of ec2 using cloudflare access, so ssh is not a public port and a hope.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://github.com/saintmalik/blue-green-ec2" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>blue-green ec2</h3>
-              <span class="tags">opentofu · ansible</span>
-            </div>
-            <p>blue-green for ec2 with tofu and ansible. the workingsng cutover started as this pattern.</p>
-          </a>
-        </li>
-        <li>
-          <a class="block" href="https://github.com/saintmalik/allgood" target="_blank" rel="noreferrer">
-            <div class="item-title-row">
-              <h3>allgood</h3>
-              <span class="tags">go</span>
-            </div>
-            <p>a health check page for a golang app that you can stand up without inventing a new status format.</p>
-          </a>
-        </li>
+      <ul class="item-list" id="projects-list">
+        <li><p class="status">loading projects…</p></li>
       </ul>
     </main>
     <footer class="site-footer">
@@ -213,6 +96,6 @@
       </div>
     </footer>
   </div>
-  <script src="site.js?v=theme2"></script>
+  <script src="site.js?v=data1"></script>
 </body>
 </html>

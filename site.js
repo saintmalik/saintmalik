@@ -461,6 +461,140 @@ async function initWriting() {
   }
 }
 
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+function formatTalkDate(value) {
+  if (!value) return "";
+  const m = String(value).match(/^(\d{4})-(\d{2})$/);
+  if (!m) return String(value);
+  const month = MONTHS[Number(m[2]) - 1];
+  return month ? `${month} ${m[1]}` : String(value);
+}
+
+function talkYearLabel(date) {
+  if (!date) return "earlier";
+  const year = String(date).slice(0, 4);
+  return /^\d{4}$/.test(year) ? year : "earlier";
+}
+
+function talkEntryHtml(talk) {
+  const dateLabel = formatTalkDate(talk.date);
+  const top = talk.date
+    ? `<div class="talk-top">
+                <h3 class="talk-title">${escapeHtml(talk.title)}</h3>
+                <time class="talk-date" datetime="${escapeHtml(talk.date)}">${escapeHtml(dateLabel)}</time>
+              </div>`
+    : `<h3 class="talk-title">${escapeHtml(talk.title)}</h3>`;
+  const host = talk.host ? `<p class="talk-host">${escapeHtml(talk.host)}</p>` : "";
+  const brief = talk.brief ? `<p class="talk-brief">${escapeHtml(talk.brief)}</p>` : "";
+  const links = [];
+  if (talk.video) links.push(`<a href="${escapeHtml(talk.video)}" target="_blank" rel="noreferrer">video</a>`);
+  if (talk.slides) links.push(`<a href="${escapeHtml(talk.slides)}" target="_blank" rel="noreferrer">slides</a>`);
+  const actions = links.length ? `<div class="talk-actions">${links.join("")}</div>` : "";
+  return `
+          <li>
+            <article class="talk-entry">
+              ${top}
+              ${host}
+              ${brief}
+              ${actions}
+            </article>
+          </li>`;
+}
+
+function talksHtml(talks) {
+  const groups = [];
+  const index = new Map();
+  for (const talk of talks) {
+    const label = talkYearLabel(talk.date);
+    if (!index.has(label)) {
+      index.set(label, []);
+      groups.push([label, index.get(label)]);
+    }
+    index.get(label).push(talk);
+  }
+  return groups
+    .map(
+      ([year, items]) => `
+        <h2 class="talk-year">${escapeHtml(year)}</h2>
+        <ul class="talks-list">
+          ${items.map(talkEntryHtml).join("")}
+        </ul>`
+    )
+    .join("");
+}
+
+async function initTalks() {
+  const root = document.getElementById("talks-list");
+  if (!root) return;
+  try {
+    const res = await fetch("/assets/talks.json");
+    if (!res.ok) throw new Error("talks.json");
+    const talks = await res.json();
+    if (!Array.isArray(talks) || !talks.length) throw new Error("empty");
+    root.innerHTML = talksHtml(talks);
+  } catch {
+    root.innerHTML = `<p class="status">could not load talks.</p>`;
+  }
+}
+
+function formatTags(tags) {
+  return (tags || []).join(" · ");
+}
+
+function projectItemHtml(project, { featured = false } = {}) {
+  const tags = featured && project.homeTags ? project.homeTags : project.tags;
+  const blurb =
+    featured && project.homeDescription ? project.homeDescription : project.description;
+  const slash =
+    featured && project.line
+      ? `<span class="slash"> // ${escapeHtml(project.line)}</span>`
+      : "";
+  return `
+          <li>
+            <a class="block" href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">
+              <div class="item-title-row">
+                <h3>${escapeHtml(project.title)}${slash}</h3>
+                <span class="tags">${escapeHtml(formatTags(tags))}</span>
+              </div>
+              <p>${escapeHtml(blurb || "")}</p>
+            </a>
+          </li>`;
+}
+
+async function fetchProjects() {
+  const res = await fetch("/assets/projects.json");
+  if (!res.ok) throw new Error("projects.json");
+  const projects = await res.json();
+  if (!Array.isArray(projects)) throw new Error("shape");
+  return projects;
+}
+
+async function initProjects() {
+  const root = document.getElementById("projects-list");
+  if (!root) return;
+  try {
+    const projects = await fetchProjects();
+    if (!projects.length) throw new Error("empty");
+    root.innerHTML = projects.map((p) => projectItemHtml(p)).join("");
+  } catch {
+    root.innerHTML = `<li><p class="status">could not load projects.</p></li>`;
+  }
+}
+
+async function initHomeProjects() {
+  const root = document.getElementById("home-projects");
+  if (!root) return;
+  try {
+    const projects = await fetchProjects();
+    const featured = projects.filter((p) => p.featured || p.home);
+    if (!featured.length) throw new Error("empty");
+    root.innerHTML = featured.map((p) => projectItemHtml(p, { featured: true })).join("");
+  } catch {
+    root.innerHTML = `<li><p class="status">could not load projects.</p></li>`;
+  }
+}
+
 const MODAL_HTML = `
   <div class="resume-modal" id="resume-modal" hidden>
     <div class="resume-modal-backdrop" data-resume-close></div>
@@ -514,7 +648,12 @@ function boot() {
   setInterval(tickClock, 30000);
   bindKeys();
   if (document.body.dataset.page === "oss") initOpenSource();
-  if (document.body.dataset.page === "home") initWriting();
+  if (document.body.dataset.page === "talks") initTalks();
+  if (document.body.dataset.page === "projects") initProjects();
+  if (document.body.dataset.page === "home") {
+    initWriting();
+    initHomeProjects();
+  }
   if (document.body.dataset.page === "resume") openResumeModal();
 }
 

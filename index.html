@@ -110,7 +110,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=type16">
+  <link rel="stylesheet" href="styles.css?v=type20">
 </head>
 <body data-page="home">
   <div class="shell">
@@ -147,34 +147,8 @@
           <h2>projects</h2>
           <a class="see-all" href="/projects">see all →</a>
         </div>
-        <ul class="item-list">
-          <li>
-            <a class="block" href="https://github.com/cicd-sensor/cicd-sensor" target="_blank" rel="noreferrer">
-              <div class="item-title-row">
-                <h3>cicd-sensor<span class="slash"> // edr for github actions. the job is the attack surface.</span></h3>
-                <span class="tags">go · ebpf · ci/cd</span>
-              </div>
-              <p>open-source ebpf runtime security sensor for github actions and gitlab ci. artifact signing and pinned shas matured. runtime insight into the runner itself lagged behind.</p>
-            </a>
-          </li>
-          <li>
-            <a class="block" href="https://github.com/saintmalik/k8sradar" target="_blank" rel="noreferrer">
-              <div class="item-title-row">
-                <h3>k8sradar<span class="slash"> // what's known about the cluster you actually run, not the one in the docs.</span></h3>
-                <span class="tags">go · kubernetes · vuln intel</span>
-              </div>
-              <p>you put in provider, kubernetes version, add-ons, node os. you get exploitability, kev, and the version that closes it. built for the moment someone from leadership asks if you are exposed to the thing on the news.</p>
-            </a>
-          </li>
-          <li>
-            <a class="block" href="https://github.com/saintmalik/supabase-audit" target="_blank" rel="noreferrer">
-              <div class="item-title-row">
-                <h3>supabase-audit<span class="slash"> // rls that looks locked until you actually query it.</span></h3>
-                <span class="tags">go · postgres</span>
-              </div>
-              <p>cli that finds over-permissive row level security, exposed tables, and the supabase misconfigs that keep showing up in assessments.</p>
-            </a>
-          </li>
+        <ul class="item-list" id="home-projects">
+          <li><p class="status">loading projects…</p></li>
         </ul>
       </section>
 
@@ -242,6 +216,6 @@
       </div>
     </div>
   </div>
-  <script src="site.js?v=theme2"></script>
+  <script src="site.js?v=data1"></script>
 </body>
 </html>

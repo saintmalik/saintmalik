@@ -1,9 +1,23 @@
 # Cloudflare Pages already serves talks.html at /talks (pretty URLs).
 # Do not 200-rewrite /talks → /talks.html — that loops with Pages' .html → pretty 308.
 # https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Tracking params (?ref=, ?utm_*): do not strip here (Pages _redirects cannot
+# easily drop query strings). HTML <link rel="canonical"> already points at the
+# clean URL, so GSC "Alternate page with proper canonical tag" for those URLs
+# is expected — mark Done fixing; they should not be indexed separately.
+#
+# Do not 200-proxy absolute URLs on Cloudflare Pages (failed before). Use 301.
 
 /favicon.ico /assets/favicon.ico 200
 /oss.json /assets/oss.json 200
+/talks.json /assets/talks.json 200
+/projects.json /assets/projects.json 200
+
+# Old Hugo/Docusaurus feed paths → live blog RSS
+/index.xml https://blog.saintmalik.me/rss.xml 301
+/rss.xml https://blog.saintmalik.me/rss.xml 301
+/feed.xml https://blog.saintmalik.me/rss.xml 301
 
 /posts/ https://blog.saintmalik.me 301
 /posts https://blog.saintmalik.me 301

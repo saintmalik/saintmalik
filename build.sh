@@ -48,7 +48,7 @@ for file in "${pages[@]}" "${root_files[@]}"; do
   cp "${root}/${file}" "${out}/${file}"
 done
 
-# photo, oss.json, fonts, favicons, manifest, browserconfig
+# photo, oss.json, talks.json, projects.json, fonts, favicons, manifest, browserconfig
 cp -R "${root}/assets/." "${out}/assets/"
 
 echo "build.sh: wrote ${out}"

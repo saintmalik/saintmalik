@@ -1,0 +1,106 @@
+[
+  {
+    "title": "shipping secure-by-design applications on google cloud",
+    "date": "2026-03",
+    "host": "gdg osogbo build with ai 2026 · osogbo",
+    "brief": "how to build on google cloud with security designed into the app and pipeline, not bolted on after deploy.",
+    "video": null,
+    "slides": "https://docs.google.com/presentation/d/1gOnsUC1FF_Hjsam3x-ncpWA2RSuAjA_omG5bgJ62CBc/edit?usp=sharing"
+  },
+  {
+    "title": "shifting left in azure: integrating security into ci/cd pipelines",
+    "date": "2026-01",
+    "host": "azure nigeria community · online",
+    "brief": "putting security checks into azure ci/cd so issues show up in the pipeline, before they hit production.",
+    "video": "https://www.youtube.com/watch?v=n3kmEs-i9cE",
+    "slides": null
+  },
+  {
+    "title": "from code to cloud: building secure ci/cd pipelines for startups",
+    "date": "2025-11",
+    "host": "gdg ado-ekiti devfest 2025 · ado-ekiti",
+    "brief": "practical secure ci/cd for small teams, from the first commit to a cloud deploy without skipping the checks that matter.",
+    "video": null,
+    "slides": "https://docs.google.com/presentation/d/1tOHHzJKqeQ-3bwf9-bHwQzSvdmcdQ1Mu/edit?usp=sharing&ouid=108994775529965909626&rtpof=true&sd=true"
+  },
+  {
+    "title": "container supply chain security for devops",
+    "date": "2023-11",
+    "host": "gdg ado-ekiti devfest 2023 · ado-ekiti",
+    "brief": "locking down how container images are built, pulled, and trusted across a devops workflow.",
+    "video": null,
+    "slides": null
+  },
+  {
+    "title": "How to contribute to open source",
+    "date": "2023-11",
+    "host": "osca ado ekiti",
+    "brief": "practical tips for making a first open source contribution without getting lost in the docs.",
+    "video": null,
+    "slides": "https://docs.google.com/presentation/d/1cnuzFo27NyKzenSJCrm5t06x-dG9_EZKNgCsTn30OKs/edit?usp=sharing"
+  },
+  {
+    "title": "introduction to open source and osca",
+    "date": "2022-03",
+    "host": "osca eldoret",
+    "brief": "what open source contribution actually looks like, and how osca helps people take the first step.",
+    "video": "https://youtube.com/watch?v=6XKddR46Hzo",
+    "slides": "https://bit.ly/saintoss1"
+  },
+  {
+    "title": "git and github for beginners",
+    "date": "2022-02",
+    "host": "osca ado ekiti · ado-ekiti",
+    "brief": "the basics of git and github for people who have not used version control yet.",
+    "video": null,
+    "slides": null
+  },
+  {
+    "title": "open source 101",
+    "date": "2022-02",
+    "host": "osca ado ekiti",
+    "brief": "a first-pass orientation to open source culture, licenses, and how to contribute.",
+    "video": null,
+    "slides": "https://bit.ly/saintoss1"
+  },
+  {
+    "title": "ethical web hacking 101",
+    "date": "2020-12",
+    "host": "diary of hackers",
+    "brief": "an intro to finding and reporting web vulnerabilities the right way.",
+    "video": "https://youtu.be/c0kw7alNzZk",
+    "slides": null
+  },
+  {
+    "title": "getting started with open source | tips and advice",
+    "date": null,
+    "host": "osca ado ekiti",
+    "brief": "practical tips for making a first open source contribution without getting lost in the docs.",
+    "video": null,
+    "slides": "https://docs.google.com/presentation/d/1CHcpUyf2OPXhLi4pVDSLAUNtkSAYWS9fNDU2xreT69Y/edit?usp=sharing"
+  },
+  {
+    "title": "all about subdomain takeover",
+    "date": null,
+    "host": "greyhat cyber solutions",
+    "brief": "how dangling dns leads to subdomain takeovers, and how to find and fix them.",
+    "video": "https://drive.google.com/file/d/1Be8dSz54Mw-z_yc2U42BzkQVqaGQTF_W/view?usp=drivesdk",
+    "slides": null
+  },
+  {
+    "title": "devsecops, what, why and how",
+    "date": null,
+    "host": "greyhat cyber solutions",
+    "brief": "what devsecops is, why teams adopt it, and how to start without boiling the ocean.",
+    "video": null,
+    "slides": "https://docs.google.com/presentation/d/1UpsmkknFwbhYxVJtnoPJDweM1g9YP4i-voDbvEr_kdk/edit?usp=sharing"
+  },
+  {
+    "title": "how the industry works and career to follow in your tech journey",
+    "date": null,
+    "host": null,
+    "brief": "career paths in tech and how teams actually ship software, for people still choosing a lane.",
+    "video": null,
+    "slides": "https://docs.google.com/presentation/d/1LGdwHklmvo6GvB7iDqddq4iNVE8HpRfkFDnPGaFEMoI/edit?usp=sharing"
+  }
+]

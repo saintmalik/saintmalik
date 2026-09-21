@@ -1,0 +1,122 @@
+[
+  {
+    "title": "cicd-sensor",
+    "slug": "cicd-sensor",
+    "line": "edr for github actions. the job is the attack surface.",
+    "description": "open-source ebpf runtime security sensor for github actions and gitlab ci/cd. looks at what the runner actually does while secrets are in memory, not at whether the yaml looks clean.",
+    "homeDescription": "open-source ebpf runtime security sensor for github actions and gitlab ci. artifact signing and pinned shas matured. runtime insight into the runner itself lagged behind.",
+    "tags": ["go", "ebpf", "ci/cd"],
+    "url": "https://github.com/cicd-sensor/cicd-sensor",
+    "featured": true
+  },
+  {
+    "title": "k8sradar",
+    "slug": "k8sradar",
+    "line": "what's known about the cluster you actually run, not the one in the docs.",
+    "description": "cli vulnerability radar for kubernetes platforms and generic software assets. cvss, epss, kev, sarif out, fail-on in ci. modelled on grype, pointed at the stack you typed in, not a generic benchmark.",
+    "homeDescription": "you put in provider, kubernetes version, add-ons, node os. you get exploitability, kev, and the version that closes it. built for the moment someone from leadership asks if you are exposed to the thing on the news.",
+    "tags": ["go", "kubernetes", "osv"],
+    "homeTags": ["go", "kubernetes", "vuln intel"],
+    "url": "https://github.com/saintmalik/k8sradar",
+    "featured": true
+  },
+  {
+    "title": "supabase-audit",
+    "slug": "supabase-audit",
+    "line": "rls that looks locked until you actually query it.",
+    "description": "cli that finds over-permissive row level security, exposed tables, and the supabase misconfigs that keep showing up in assessments.",
+    "tags": ["go", "postgres"],
+    "url": "https://github.com/saintmalik/supabase-audit",
+    "featured": true
+  },
+  {
+    "title": "house a kopa",
+    "slug": "house-a-kopa",
+    "line": null,
+    "description": "verified apartments, cheaper furniture, and a way for nysc corps members to actually move cities without getting scammed on day one.",
+    "tags": ["go", "product"],
+    "url": "https://houseakopa.com",
+    "featured": false
+  },
+  {
+    "title": "cloudwatchdog",
+    "slug": "cloudwatchdog",
+    "line": null,
+    "description": "aws cost and waste, with a cleanup path. unused resources, spend breakdown, slack when something starts leaking money.",
+    "tags": ["go", "aws"],
+    "url": "https://cloudwatch.saintmalik.me/",
+    "featured": false
+  },
+  {
+    "title": "sendwish",
+    "slug": "sendwish",
+    "line": null,
+    "description": "personalized wishes that are not a template with a name swapped in. built because the existing ones were.",
+    "tags": ["go", "product"],
+    "url": "https://sendwish.app",
+    "featured": false
+  },
+  {
+    "title": "stickerkeen",
+    "slug": "stickerkeen",
+    "line": null,
+    "description": "merch platform for creating, managing, and distributing product across africa.",
+    "tags": ["next.js", "nuxt"],
+    "url": "https://stickerkeen.com",
+    "featured": false
+  },
+  {
+    "title": "plixa",
+    "slug": "plixa",
+    "line": null,
+    "description": "dry cleaning in ilorin with pickup at the door. also the name of an older payments experiment that did not want receipts to vanish.",
+    "tags": ["go", "vue"],
+    "url": "https://plixa.stickerkeen.com",
+    "featured": false
+  },
+  {
+    "title": "dca tool",
+    "slug": "dca-tool",
+    "line": null,
+    "description": "buys the asset you already decided on, when the market moves by the percentage you set. no new thesis at 2am.",
+    "tags": ["go", "binance"],
+    "url": "https://dca-tool.netlify.app",
+    "featured": false
+  },
+  {
+    "title": "awesome oss docs",
+    "slug": "awesome-oss-docs",
+    "line": null,
+    "description": "curated list of open source documentation for people who actually want to contribute to docs. still the repo with the most stars, which tells you something about the work that compounds.",
+    "tags": ["docs", "javascript"],
+    "url": "https://github.com/saintmalik/awesome-oss-docs",
+    "featured": false
+  },
+  {
+    "title": "cloudflare zero trust ec2",
+    "slug": "cloudflare-zero-trust-ec2",
+    "line": null,
+    "description": "zero trust in front of ec2 using cloudflare access, so ssh is not a public port and a hope.",
+    "tags": ["terraform", "opentofu"],
+    "url": "https://github.com/saintmalik/cloudflare-zero-trust-ec2",
+    "featured": false
+  },
+  {
+    "title": "blue-green ec2",
+    "slug": "blue-green-ec2",
+    "line": null,
+    "description": "blue-green for ec2 with tofu and ansible. the workingsng cutover started as this pattern.",
+    "tags": ["opentofu", "ansible"],
+    "url": "https://github.com/saintmalik/blue-green-ec2",
+    "featured": false
+  },
+  {
+    "title": "allgood",
+    "slug": "allgood",
+    "line": null,
+    "description": "a health check page for a golang app that you can stand up without inventing a new status format.",
+    "tags": ["go"],
+    "url": "https://github.com/saintmalik/allgood",
+    "featured": false
+  }
+]
