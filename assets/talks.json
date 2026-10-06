@@ -1,5 +1,21 @@
 [
   {
+    "title": "securing ai generated code: pipeline guardrails for llm and agentic workflows",
+    "date": "2026-10",
+    "host": "gdg ado-ekiti devfest 2026 · ado-ekiti",
+    "brief": "pipeline guardrails for llm and agentic code generation — securing ai-generated code in the ci/cd path.",
+    "video": "https://lnkd.in/p/eTuBeWhh",
+    "slides": "https://docs.google.com/presentation/d/1mkLLA3DwlYRXlUvGvPQz0l47_O4vkAj8L3oQW47g390/edit?usp=sharing"
+  },
+  {
+    "title": "container security on azure using aks + microsoft defender for containers + azure policy + runtime protection",
+    "date": "2026-10",
+    "host": "azure nigeria community",
+    "brief": "securing aks workloads with microsoft defender for containers, azure policy, and runtime protection across the cluster.",
+    "video": null,
+    "slides": "https://docs.google.com/presentation/d/1PUyZe5clAEOa5MPYtGTRR7joRdBsuYAuC5CdrnrGlsA/edit?usp=sharing"
+  },
+  {
     "title": "shipping secure-by-design applications on google cloud",
     "date": "2026-03",
     "host": "gdg osogbo build with ai 2026 · osogbo",
