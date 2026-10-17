@@ -3,11 +3,6 @@ const LINKS = {
   oss: "/open-source",
   talks: "/talks",
   projects: "/projects",
-  github: "https://github.com/saintmalik",
-  x: "https://x.com/saintmalik_",
-  linkedin: "https://linkedin.com/in/saintmalik",
-  email: "mailto:abdulmalik@saintmalik.me",
-  blog: "https://blog.saintmalik.me/",
 };
 
 function googleDocUrls(id) {
@@ -18,42 +13,76 @@ function googleDocUrls(id) {
   };
 }
 
-// TODO: paste Google Doc id for runtime + supply chain — never reuse another role's id
-const RESUME_RUNTIME_ID = "";
-const RESUME_DEVSECOPS_ID = "1-oSs6dQSUp9KPIBVLQUNMll4dT6czgIqKHI6dGyCycU";
-const RESUME_CLOUD_ID = "1Wu7I3GTcf0iAjvTOaQZsUYU6sTKNH2S7wDtL788_7bE";
+let RESUMES = [];
+let RESUME_INTRO = "same record, different things leading. pick whichever role you are hiring for.";
+let RESUME_EMAIL = "";
+let SITE_LINKS = [];
 
-const RESUME_RUNTIME = googleDocUrls(RESUME_RUNTIME_ID);
-const RESUME_DEVSECOPS = googleDocUrls(RESUME_DEVSECOPS_ID);
-const RESUME_CLOUD = googleDocUrls(RESUME_CLOUD_ID);
+function normalizeResumeRole(role) {
+  const urls = googleDocUrls(role.docId || "");
+  return {
+    id: role.id,
+    title: role.title,
+    blurb: role.blurb,
+    file: urls.file,
+    open: urls.open,
+    download: role.download || "",
+  };
+}
 
-const RESUMES = [
-  {
-    id: "runtime",
-    title: "runtime + supply chain",
-    blurb: "ebpf on ci (cicd-sensor), sboms, k8sradar, audit evidence",
-    file: RESUME_RUNTIME.file,
-    open: RESUME_RUNTIME.open,
-    download: "abdulmalik-salawu-runtime.pdf",
-  },
-  {
-    id: "devsecops",
-    title: "appsec / devsecops",
-    blurb: "reviews, pipelines, shift-left, supabase-audit, disclosures to openclassroom, andela, kuda",
-    file: RESUME_DEVSECOPS.file,
-    open: RESUME_DEVSECOPS.open,
-    download: "abdulmalik-salawu-devsecops.pdf",
-  },
-  {
-    id: "cloud",
-    title: "cloud / platform security",
-    blurb: "iam, guardduty, landing zones, zero-trust, container security on aws",
-    file: RESUME_CLOUD.file,
-    open: RESUME_CLOUD.open,
-    download: "abdulmalik-salawu-cloud-security.pdf",
-  },
-];
+async function loadResumes() {
+  const res = await fetch("/assets/resumes.json");
+  if (!res.ok) throw new Error("resumes.json");
+  const data = await res.json();
+  if (data.intro) RESUME_INTRO = data.intro;
+  RESUMES = (data.roles || []).map(normalizeResumeRole);
+  if (!RESUMES.length) throw new Error("empty resumes");
+}
 
+let linksDataPromise = null;
+
+function fetchLinks() {
+  if (!linksDataPromise) {
+    linksDataPromise = fetch("/assets/links.json").then((res) => {
+      if (!res.ok) throw new Error("links.json");
+      return res.json();
+    });
+  }
+  return linksDataPromise;
+}
+
+function emailFromLinks(links) {
+  const hit = (links || []).find(
+    (link) => link.label === "email" || (link.href && link.href.startsWith("mailto:"))
+  );
+  return hit ? hit.href : "";
+}
+
+async function loadSiteLinks() {
+  const data = await fetchLinks();
+  SITE_LINKS = data.links || [];
+  RESUME_EMAIL = emailFromLinks(SITE_LINKS);
+  if (!SITE_LINKS.length) throw new Error("empty links");
+}
+
+function renderSiteFooters() {
+  const html = footerLinksHtml(SITE_LINKS);
+  document.querySelectorAll(".footer-links").forEach((nav) => {
+    nav.innerHTML = html;
+  });
+}
+
+let homeDataPromise = null;
+
+function fetchHome() {
+  if (!homeDataPromise) {
+    homeDataPromise = fetch("/assets/home.json").then((res) => {
+      if (!res.ok) throw new Error("home.json");
+      return res.json();
+    });
+  }
+  return homeDataPromise;
+}
 function currentPath() {
   const p = location.pathname.replace(/index\.html$/, "").replace(/\.html$/, "");
   if (p === "" || p === "/") return "/";
@@ -108,10 +137,12 @@ function markActiveNav() {
 }
 
 function defaultResumeId() {
+  if (!RESUMES.length) return "";
   return RESUMES.find((item) => item.file)?.id || RESUMES[0].id;
 }
 
 function selectedResume() {
+  if (!RESUMES.length) return null;
   const id = document.querySelector(".resume-role[aria-pressed='true']")?.dataset.role || defaultResumeId();
   return RESUMES.find((item) => item.id === id) || RESUMES[0];
 }
@@ -141,6 +172,11 @@ function setResumeAction(el, href, opts = {}) {
 
 function syncResumeLinks() {
   const resume = selectedResume();
+  if (!resume) {
+    setResumeAction(document.getElementById("resume-open"), "");
+    setResumeAction(document.getElementById("resume-download"), "");
+    return;
+  }
   setResumeAction(document.getElementById("resume-open"), resume.open || resume.file, { blank: true });
   setResumeAction(document.getElementById("resume-download"), resume.file, { download: resume.download });
 }
@@ -184,10 +220,30 @@ function renderResumeRoles() {
   const root = document.querySelector(".resume-roles");
   if (!root) return;
   root.innerHTML = resumeRolesHtml();
+  const intro = document.querySelector(".resume-sheet-head p");
+  if (intro) intro.textContent = RESUME_INTRO;
+  const mail = document.querySelector(".resume-actions-row .mail");
+  if (mail) mail.href = RESUME_EMAIL;
+  const pageLede = document.querySelector('[data-page="resume"] .page-lede');
+  if (pageLede) pageLede.textContent = RESUME_INTRO;
+}
+
+function bindResumeRoleClicks() {
+  document.querySelectorAll(".resume-role").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".resume-role").forEach((other) => {
+        const on = other === btn;
+        other.setAttribute("aria-pressed", on ? "true" : "false");
+        other.querySelector(".role-dot").textContent = on ? "●" : "○";
+      });
+      syncResumeLinks();
+    });
+  });
 }
 
 function bindResumeModal() {
   renderResumeRoles();
+  bindResumeRoleClicks();
   document.querySelectorAll("[data-resume-open]").forEach((el) => {
     el.addEventListener("click", (event) => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
@@ -200,17 +256,23 @@ function bindResumeModal() {
   document.querySelectorAll("[data-resume-close]").forEach((el) => {
     el.addEventListener("click", closeResumeModal);
   });
-  document.querySelectorAll(".resume-role").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".resume-role").forEach((other) => {
-        const on = other === btn;
-        other.setAttribute("aria-pressed", on ? "true" : "false");
-        other.querySelector(".role-dot").textContent = on ? "●" : "○";
-      });
-      syncResumeLinks();
-    });
-  });
   syncResumeLinks();
+  renderResumePageActions();
+}
+
+function renderResumePageActions() {
+  const root = document.getElementById("resume-page-actions");
+  if (!root) return;
+  const resume = selectedResume();
+  if (!resume || !resume.file) {
+    root.innerHTML = `
+        <a class="btn" href="${escapeHtml(RESUME_EMAIL)}">email</a>`;
+    return;
+  }
+  root.innerHTML = `
+        <a class="btn" href="${escapeHtml(resume.open || resume.file)}" target="_blank" rel="noreferrer">open resume</a>
+        <a class="btn" href="${escapeHtml(resume.file)}" download="${escapeHtml(resume.download)}">pdf</a>
+        <a class="btn" href="${escapeHtml(RESUME_EMAIL)}">email</a>`;
 }
 
 function tickClock() {
@@ -447,6 +509,15 @@ function writingHtml(items) {
     .join("");
 }
 
+async function writingFallbackItems() {
+  try {
+    const data = await fetchHome();
+    return data.writingFallback || [];
+  } catch {
+    return [];
+  }
+}
+
 async function initWriting() {
   const root = document.getElementById("writing-list");
   if (!root) return;
@@ -457,7 +528,101 @@ async function initWriting() {
     if (!items.length) throw new Error("empty");
     root.innerHTML = writingHtml(items);
   } catch {
-    // keep the two Sep 12 posts already in the HTML
+    const fallback = await writingFallbackItems();
+    if (fallback.length) root.innerHTML = writingHtml(fallback);
+    else root.innerHTML = `<li><p class="status">could not load writing.</p></li>`;
+  }
+}
+
+function footerLinksHtml(links) {
+  return (links || [])
+    .map((link) => {
+      const extra = link.external ? ' target="_blank" rel="noreferrer"' : "";
+      return `<a href="${escapeHtml(link.href)}"${extra}>${escapeHtml(link.label)}</a>`;
+    })
+    .join("\n          ");
+}
+
+function renderHomeIdentity(data) {
+  const name = document.getElementById("home-name");
+  if (name) name.textContent = data.name || "";
+
+  const roles = document.getElementById("home-roles");
+  if (roles) {
+    roles.innerHTML = (data.roles || [])
+      .map((role) => `<span>${escapeHtml(role)}</span>`)
+      .join("\n            ");
+  }
+
+  const photo = document.getElementById("home-photo");
+  if (photo) {
+    if (data.photo) photo.src = data.photo;
+    if (data.photoAlt) photo.alt = data.photoAlt;
+  }
+
+  const bio = document.getElementById("home-bio");
+  if (bio) {
+    bio.innerHTML = (data.bio || []).map((p) => `<p>${p}</p>`).join("\n        ");
+  }
+}
+
+async function initHome() {
+  if (document.body.dataset.page !== "home") return;
+  try {
+    const data = await fetchHome();
+    renderHomeIdentity(data);
+  } catch {
+    const bio = document.getElementById("home-bio");
+    if (bio && !bio.children.length) {
+      bio.innerHTML = `<p class="status">could not load home copy.</p>`;
+    }
+  }
+}
+
+function jobBulletsHtml(bullets) {
+  return `<ul>
+          ${(bullets || [])
+            .map(
+              (text, i) =>
+                `<li><span class="n">${String(i + 1).padStart(2, "0")}</span><span>${escapeHtml(text)}</span></li>`
+            )
+            .join("\n          ")}
+        </ul>`;
+}
+
+function jobHtml(job) {
+  const sections = (job.sections || [])
+    .map((section) => {
+      const era = section.era ? `<p class="job-era">${escapeHtml(section.era)}</p>\n        ` : "";
+      return `${era}${jobBulletsHtml(section.bullets)}`;
+    })
+    .join("\n        ");
+  return `
+      <article class="job">
+        <div class="job-head">
+          <h2>${escapeHtml(job.company)}</h2>
+          <span class="job-dates">${escapeHtml(job.dates || "")}</span>
+        </div>
+        <p class="job-role">${escapeHtml(job.role || "")}</p>
+        <p class="job-one">${escapeHtml(job.summary || "")}</p>
+        ${sections}
+      </article>`;
+}
+
+async function initExperience() {
+  const root = document.getElementById("experience-list");
+  if (!root) return;
+  try {
+    const res = await fetch("/assets/experience.json");
+    if (!res.ok) throw new Error("experience.json");
+    const data = await res.json();
+    const lede = document.getElementById("experience-lede");
+    if (lede && data.lede) lede.textContent = data.lede;
+    const jobs = data.jobs || [];
+    if (!jobs.length) throw new Error("empty");
+    root.innerHTML = jobs.map(jobHtml).join("\n");
+  } catch {
+    root.innerHTML = `<p class="status">could not load work history.</p>`;
   }
 }
 
@@ -614,7 +779,7 @@ const MODAL_HTML = `
       <div class="resume-actions-row">
         <a class="btn-gold" id="resume-open" target="_blank" rel="noreferrer">open pdf</a>
         <a class="btn" id="resume-download">download</a>
-        <a class="mail" href="mailto:abdulmalik@saintmalik.me">or just email me →</a>
+        <a class="mail" href="#">or just email me →</a>
       </div>
     </div>
   </div>`;
@@ -629,7 +794,7 @@ function injectClarity() {
   })(window, document, "clarity", "script", "rb5lzwkxst");
 }
 
-function boot() {
+async function boot() {
   if (!document.getElementById("lg")) {
     document.body.insertAdjacentHTML("afterbegin", LG_FILTER);
   }
@@ -643,14 +808,30 @@ function boot() {
   } catch (_) {}
   applyTheme(saved);
   bindThemeToggle();
-  bindResumeModal();
   tickClock();
   setInterval(tickClock, 30000);
   bindKeys();
+
+  try {
+    await loadSiteLinks();
+    renderSiteFooters();
+  } catch {
+    SITE_LINKS = [];
+  }
+
+  try {
+    await loadResumes();
+  } catch {
+    RESUMES = [];
+  }
+  bindResumeModal();
+
   if (document.body.dataset.page === "oss") initOpenSource();
   if (document.body.dataset.page === "talks") initTalks();
   if (document.body.dataset.page === "projects") initProjects();
+  if (document.body.dataset.page === "work") initExperience();
   if (document.body.dataset.page === "home") {
+    initHome();
     initWriting();
     initHomeProjects();
   }
@@ -658,4 +839,6 @@ function boot() {
 }
 
 injectClarity();
-document.addEventListener("DOMContentLoaded", boot);
+document.addEventListener("DOMContentLoaded", () => {
+  boot();
+});

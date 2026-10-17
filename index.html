@@ -126,21 +126,13 @@
     <main>
       <header class="identity">
         <div>
-          <h1>abdulmalik</h1>
-          <p class="roles">
-            <span>devsecops</span>
-            <span>product security</span>
-            <span>infrastructure security</span>
-          </p>
+          <h1 id="home-name"></h1>
+          <p class="roles" id="home-roles"></p>
         </div>
-        <img src="/assets/abdulmalik.png" alt="Abdulmalik Salawu">
+        <img id="home-photo" src="/assets/abdulmalik.png" alt="Abdulmalik Salawu">
       </header>
 
-      <div class="prose">
-        <p>I write golang for security tooling, kubernetes clis, audit tools and go+templ products, and i sit with the infra and development teams, ensuring products are secure, doing code reviews and building secure pipelines, from appsec, cloud and kubernetes security, the supply chain: ebpf, sboms, runtime. i've disclosed vulns to openclassroom, andela and kuda, and i contribute to <a href="/open-source">open source</a>.</p>
-        <p>right now i'm in runtime security, supply chain and cloud posture: ebpf on ci runners, sboms that get queried, and the evidence that survives an audit. i lead devsecops at bluebulb financials. 2x aws community builder.</p>
-        <p>in a day i'm on agent identity, runtime policy and attested tool calls: proving what an agent ran, under what policy, and that it wasn't a borrowed name. next i want work that's close to the machine , detection and attestation of ci/cd, kubernetes memory and runtime, anything low-level enough to care what the box is doing. i still ship <a href="/projects">products</a> from lived experience, and i <a href="https://blog.saintmalik.me/" target="_blank" rel="noreferrer">write</a>.</p>
-      </div>
+      <div class="prose" id="home-bio"></div>
 
       <section class="section">
         <div class="section-head">
@@ -158,29 +150,13 @@
           <a class="see-all" href="https://blog.saintmalik.me/" target="_blank" rel="noreferrer">see all →</a>
         </div>
         <ul class="item-list" id="writing-list">
-          <li>
-            <a class="write-row" href="https://blog.saintmalik.me/cicd-sensor-github-actions/" target="_blank" rel="noreferrer">
-              <span>Think EDR, but for CI/CD: cicd-sensor on GitHub Actions</span>
-              <span class="write-date">Sep 12, 2026</span>
-            </a>
-          </li>
-          <li>
-            <a class="write-row" href="https://blog.saintmalik.me/runtime-trace-process-attestation/" target="_blank" rel="noreferrer">
-              <span>Runtime Trace attestation: signed image, dishonest process</span>
-              <span class="write-date">Sep 12, 2026</span>
-            </a>
-          </li>
+          <li><p class="status">loading writing…</p></li>
         </ul>
       </section>
     </main>
     <footer class="site-footer">
       <div class="footer-row">
-        <nav class="footer-links">
-          <a href="https://github.com/saintmalik" target="_blank" rel="noreferrer">github</a>
-          <a href="https://x.com/saintmalik_" target="_blank" rel="noreferrer">x</a>
-          <a href="https://linkedin.com/in/saintmalik" target="_blank" rel="noreferrer">linkedin</a>
-          <a href="mailto:abdulmalik@saintmalik.me">email</a>
-        </nav>
+        <nav class="footer-links" aria-label="social"></nav>
         <span class="footer-end">
           <span class="clock" id="clock"></span>
           <button class="theme-toggle" type="button" data-theme-toggle>white</button>
@@ -212,10 +188,10 @@
       <div class="resume-actions-row">
         <a class="btn-gold" id="resume-open" target="_blank" rel="noreferrer">open pdf</a>
         <a class="btn" id="resume-download">download</a>
-        <a class="mail" href="mailto:abdulmalik@saintmalik.me">or just email me →</a>
+        <a class="mail" href="#">or just email me →</a>
       </div>
     </div>
   </div>
-  <script src="site.js?v=data1"></script>
+  <script src="site.js?v=links1"></script>
 </body>
 </html>

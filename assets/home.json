@@ -1,0 +1,27 @@
+{
+  "name": "abdulmalik",
+  "photo": "/assets/abdulmalik.png",
+  "photoAlt": "Abdulmalik Salawu",
+  "roles": [
+    "devsecops",
+    "product security",
+    "infrastructure security"
+  ],
+  "bio": [
+    "I write golang for security tooling, kubernetes clis, audit tools and go+templ products, and i sit with the infra and development teams, ensuring products are secure, doing code reviews and building secure pipelines, from appsec, cloud and kubernetes security, the supply chain: ebpf, sboms, runtime. i've disclosed vulns to openclassroom, andela and kuda, and i contribute to <a href=\"/open-source\">open source</a>.",
+    "right now i'm in runtime security, supply chain and cloud posture: ebpf on ci runners, sboms that get queried, and the evidence that survives an audit. i'm a founding engineer building ai security that reads your product, then finds, proves and fixes what scanners miss. i used to lead devsecops at bluebulb financials. 2x aws community builder.",
+    "in a day i'm on agent identity, runtime policy and attested tool calls: proving what an agent ran, under what policy, and that it wasn't a borrowed name. next i want work that's close to the machine , detection and attestation of ci/cd, kubernetes memory and runtime, anything low-level enough to care what the box is doing. i still ship <a href=\"/projects\">products</a> from lived experience, and i <a href=\"https://blog.saintmalik.me/\" target=\"_blank\" rel=\"noreferrer\">write</a>."
+  ],
+  "writingFallback": [
+    {
+      "title": "Think EDR, but for CI/CD: cicd-sensor on GitHub Actions",
+      "href": "https://blog.saintmalik.me/cicd-sensor-github-actions/",
+      "date": "Sep 12, 2026"
+    },
+    {
+      "title": "Runtime Trace attestation: signed image, dishonest process",
+      "href": "https://blog.saintmalik.me/runtime-trace-process-attestation/",
+      "date": "Sep 12, 2026"
+    }
+  ]
+}

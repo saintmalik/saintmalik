@@ -1,0 +1,8 @@
+{
+  "links": [
+    { "label": "github", "href": "https://github.com/saintmalik", "external": true },
+    { "label": "x", "href": "https://x.com/saintmalik_", "external": true },
+    { "label": "linkedin", "href": "https://linkedin.com/in/saintmalik", "external": true },
+    { "label": "email", "href": "mailto:abdulmalik@saintmalik.me", "external": false }
+  ]
+}

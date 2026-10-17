@@ -1,0 +1,61 @@
+{
+  "lede": "everything here has a commit or a dashboard behind it.",
+  "jobs": [
+    {
+      "company": "bluebulb financials",
+      "dates": "jun 2025 – now",
+      "role": "lead / senior devsecops engineer",
+      "summary": "group security engineering for a uk financial product on aws. senior jun 2025, lead jun 2026.",
+      "sections": [
+        {
+          "era": "senior · jun 2025 – jun 2026",
+          "bullets": [
+            "killed static credentials: irsa/oidc, iam database auth with sbu isolation, github app installation tokens.",
+            "hardened argocd, helm and iac. no more cluster-admin in ci. sbom/cve generation on the path that actually ships.",
+            "github org governance as code: privileged access inventory, production merge gates, zero shadow admins.",
+            "serverless sast on cloudflare workers with opengrep and llm triage, plus cloudtrail detections into slack and an internal trail explorer."
+          ]
+        },
+        {
+          "era": "lead · jun 2026 – oct 2026",
+          "bullets": [
+            "set the security-by-design baseline: iam, zero-trust network, iac, vulnerability slas. architecture reviews before the merge, not after the audit.",
+            "run cspm and incident response: guardduty and cloudtrail triage, forensic timelines, executive briefs, mitigation runbooks.",
+            "authorized internal vapt and secure code review. hop on the debugging call, patch with the engineer, retest, close the sla.",
+            "technical authority for customer audits and due diligence. map live controls to evidence, not a slide."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "workingsng",
+      "dates": "oct 2024 – mar 2025",
+      "role": "devsecops engineer",
+      "summary": "django/react on ec2. the cutover work.",
+      "sections": [
+        {
+          "era": null,
+          "bullets": [
+            "blue-green on ec2 so deploys stopped being downtime.",
+            "opentofu, container signing, ssm for parameters. pairing on the high and critical findings until they closed."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "bute system limited (odda)",
+      "dates": "feb 2021 – aug 2022",
+      "role": "application security engineer",
+      "summary": "first role that said appsec on the contract. golang clis, production apis, aws iam.",
+      "sections": [
+        {
+          "era": null,
+          "bullets": [
+            "built the tooling in go, then used it on the apis i was asked to test.",
+            "sast, sca and dast in the pipeline. mttr on critical network misconfigs went from days to under 24 hours."
+          ]
+        }
+      ]
+    }
+  ]
+}

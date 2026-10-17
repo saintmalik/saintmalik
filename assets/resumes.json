@@ -1,0 +1,26 @@
+{
+  "intro": "same record, different things leading. pick whichever role you are hiring for.",
+  "roles": [
+    {
+      "id": "runtime",
+      "title": "runtime + supply chain",
+      "blurb": "ebpf on ci (cicd-sensor), sboms, k8sradar, audit evidence",
+      "docId": "",
+      "download": "abdulmalik-salawu-runtime.pdf"
+    },
+    {
+      "id": "devsecops",
+      "title": "appsec / devsecops",
+      "blurb": "reviews, pipelines, shift-left, supabase-audit, disclosures to openclassroom, andela, kuda",
+      "docId": "1-oSs6dQSUp9KPIBVLQUNMll4dT6czgIqKHI6dGyCycU",
+      "download": "abdulmalik-salawu-devsecops.pdf"
+    },
+    {
+      "id": "cloud",
+      "title": "cloud / platform security",
+      "blurb": "iam, guardduty, landing zones, zero-trust, container security on aws",
+      "docId": "1Wu7I3GTcf0iAjvTOaQZsUYU6sTKNH2S7wDtL788_7bE",
+      "download": "abdulmalik-salawu-cloud-security.pdf"
+    }
+  ]
+}

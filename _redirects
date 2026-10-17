@@ -13,6 +13,10 @@
 /oss.json /assets/oss.json 200
 /talks.json /assets/talks.json 200
 /projects.json /assets/projects.json 200
+/home.json /assets/home.json 200
+/links.json /assets/links.json 200
+/resumes.json /assets/resumes.json 200
+/experience.json /assets/experience.json 200
 
 # Old Hugo/Docusaurus feed paths → live blog RSS
 /index.xml https://blog.saintmalik.me/rss.xml 301
