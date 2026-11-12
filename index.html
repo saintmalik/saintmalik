@@ -109,8 +109,11 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="/assets/home.json" as="fetch" crossorigin>
+  <link rel="preload" href="/assets/projects.json" as="fetch" crossorigin>
+  <link rel="preload" href="/assets/links.json" as="fetch" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=type20">
+  <link rel="stylesheet" href="styles.css?v=talks21">
 </head>
 <body data-page="home">
   <div class="shell">
@@ -126,8 +129,12 @@
     <main>
       <header class="identity">
         <div>
-          <h1 id="home-name"></h1>
-          <p class="roles" id="home-roles"></p>
+          <h1 id="home-name">abdulmalik</h1>
+          <p class="roles" id="home-roles">
+            <span>devsecops</span>
+            <span>product security</span>
+            <span>infrastructure security</span>
+          </p>
         </div>
         <img id="home-photo" src="/assets/abdulmalik.png" alt="Abdulmalik Salawu">
       </header>
@@ -192,6 +199,6 @@
       </div>
     </div>
   </div>
-  <script src="site.js?v=links1"></script>
+  <script src="site.js?v=home2"></script>
 </body>
 </html>

@@ -1,0 +1,15 @@
+# Cloudflare Pages — keep JSON warm for repeat navigations without pinning forever.
+/assets/*.json
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.png
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/styles.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/site.js
+  Cache-Control: public, max-age=0, must-revalidate

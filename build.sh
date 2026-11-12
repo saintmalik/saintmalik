@@ -16,6 +16,7 @@ pages=(
   talks.html
   open-source.html
   resume.html
+  404.html
 )
 
 root_files=(
@@ -27,6 +28,7 @@ root_files=(
   llms-full.txt
   ads.txt
   _redirects
+  _headers
 )
 
 missing=0

@@ -2,12 +2,23 @@
 # Do not 200-rewrite /talks → /talks.html — that loops with Pages' .html → pretty 308.
 # https://developers.cloudflare.com/pages/configuration/redirects/
 #
+# GSC "Page with redirect" for /index.html, /*.html, trailing-slash variants is
+# expected: Pages 308s those to the pretty URL. Do not try to make them indexable.
+#
 # Tracking params (?ref=, ?utm_*): do not strip here (Pages _redirects cannot
 # easily drop query strings). HTML <link rel="canonical"> already points at the
 # clean URL, so GSC "Alternate page with proper canonical tag" for those URLs
 # is expected — mark Done fixing; they should not be indexed separately.
 #
+# Top-level 404.html disables Pages' SPA soft-404 (index.html 200 on unknown paths).
+# https://developers.cloudflare.com/pages/configuration/serving-pages/
+#
 # Do not 200-proxy absolute URLs on Cloudflare Pages (failed before). Use 301.
+#
+# www → apex CANNOT live here. Pages _redirects is path-only; domain-level
+# redirects are unsupported (docs table: Domain-level redirects ❌).
+# A proxied www that is not wired for redirects/Pages returns Cloudflare 522
+# before this file is evaluated. Fix in the Cloudflare dashboard — see CLOUDFLARE.md.
 
 /favicon.ico /assets/favicon.ico 200
 /oss.json /assets/oss.json 200
@@ -17,6 +28,11 @@
 /links.json /assets/links.json 200
 /resumes.json /assets/resumes.json 200
 /experience.json /assets/experience.json 200
+
+# Unpublished work page — consolidate old URLs to home (not soft-404 homepage)
+/experience / 301
+/experience/ / 301
+/experience.html / 301
 
 # Old Hugo/Docusaurus feed paths → live blog RSS
 /index.xml https://blog.saintmalik.me/rss.xml 301

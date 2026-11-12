@@ -72,6 +72,8 @@ function renderSiteFooters() {
   });
 }
 
+const WRITING_FEED = "https://blog.saintmalik.me/rss.xml";
+
 let homeDataPromise = null;
 
 function fetchHome() {
@@ -82,6 +84,53 @@ function fetchHome() {
     });
   }
   return homeDataPromise;
+}
+
+let projectsDataPromise = null;
+
+function fetchProjects() {
+  if (!projectsDataPromise) {
+    projectsDataPromise = fetch("/assets/projects.json").then((res) => {
+      if (!res.ok) throw new Error("projects.json");
+      return res.json().then((projects) => {
+        if (!Array.isArray(projects)) throw new Error("shape");
+        return projects;
+      });
+    });
+  }
+  return projectsDataPromise;
+}
+
+function writingFeedUrl() {
+  const host = location.hostname;
+  if (host === "127.0.0.1" || host === "localhost") return "/blog-feed.xml";
+  return WRITING_FEED;
+}
+
+let writingFeedPromise = null;
+
+function fetchWritingFeedText() {
+  if (!writingFeedPromise) {
+    writingFeedPromise = fetch(writingFeedUrl()).then((res) => {
+      if (!res.ok) throw new Error("feed");
+      return res.text();
+    });
+  }
+  return writingFeedPromise;
+}
+
+function warmPageCaches() {
+  const page = document.body && document.body.dataset.page;
+  fetchLinks();
+  if (page === "home") {
+    fetchHome();
+    fetchProjects();
+    fetchWritingFeedText().catch(() => {});
+  } else if (page === "projects") {
+    fetchProjects();
+  } else if (page === "talks") {
+    fetchTalks().catch(() => {});
+  }
 }
 function currentPath() {
   const p = location.pathname.replace(/index\.html$/, "").replace(/\.html$/, "");
@@ -460,7 +509,6 @@ async function initOpenSource() {
   }
 }
 
-const WRITING_FEED = "https://blog.saintmalik.me/rss.xml";
 const WRITING_LIMIT = 2;
 
 function formatWritingDate(value) {
@@ -521,16 +569,28 @@ async function writingFallbackItems() {
 async function initWriting() {
   const root = document.getElementById("writing-list");
   if (!root) return;
-  try {
-    const res = await fetch(WRITING_FEED, { cache: "no-store" });
-    if (!res.ok) throw new Error("feed");
-    const items = parseWritingFeed(await res.text());
-    if (!items.length) throw new Error("empty");
-    root.innerHTML = writingHtml(items);
-  } catch {
-    const fallback = await writingFallbackItems();
-    if (fallback.length) root.innerHTML = writingHtml(fallback);
-    else root.innerHTML = `<li><p class="status">could not load writing.</p></li>`;
+
+  const fallbackP = writingFallbackItems();
+  const feedP = fetchWritingFeedText()
+    .then((text) => {
+      const items = parseWritingFeed(text);
+      if (!items.length) throw new Error("empty");
+      return items;
+    })
+    .catch(() => null);
+
+  // Paint cached home fallback immediately so the section is never stuck on "loading…"
+  // while a cross-origin RSS round-trip (or CORS miss) runs.
+  const fallback = await fallbackP;
+  if (fallback.length) root.innerHTML = writingHtml(fallback);
+
+  const live = await feedP;
+  if (live && live.length) {
+    root.innerHTML = writingHtml(live);
+    return;
+  }
+  if (!fallback.length) {
+    root.innerHTML = `<li><p class="status">could not load writing.</p></li>`;
   }
 }
 
@@ -644,13 +704,16 @@ function talkYearLabel(date) {
 
 function talkEntryHtml(talk) {
   const dateLabel = formatTalkDate(talk.date);
-  const top = talk.date
-    ? `<div class="talk-top">
-                <h3 class="talk-title">${escapeHtml(talk.title)}</h3>
-                <time class="talk-date" datetime="${escapeHtml(talk.date)}">${escapeHtml(dateLabel)}</time>
-              </div>`
-    : `<h3 class="talk-title">${escapeHtml(talk.title)}</h3>`;
-  const host = talk.host ? `<p class="talk-host">${escapeHtml(talk.host)}</p>` : "";
+  const type =
+    talk.type === "panel" ? `<span class="talk-type">[panel]</span>` : "";
+  const meta = [];
+  if (talk.host) meta.push(`<span class="talk-host">${escapeHtml(talk.host)}</span>`);
+  if (talk.date && dateLabel) {
+    meta.push(
+      `<time class="talk-date" datetime="${escapeHtml(talk.date)}">${escapeHtml(dateLabel)}</time>`
+    );
+  }
+  const metaRow = meta.length ? `<p class="talk-meta">${meta.join('<span class="talk-meta-sep" aria-hidden="true"> · </span>')}</p>` : "";
   const brief = talk.brief ? `<p class="talk-brief">${escapeHtml(talk.brief)}</p>` : "";
   const links = [];
   if (talk.video) links.push(`<a href="${escapeHtml(talk.video)}" target="_blank" rel="noreferrer">video</a>`);
@@ -659,8 +722,8 @@ function talkEntryHtml(talk) {
   return `
           <li>
             <article class="talk-entry">
-              ${top}
-              ${host}
+              <h3 class="talk-title">${escapeHtml(talk.title)}${type}</h3>
+              ${metaRow}
               ${brief}
               ${actions}
             </article>
@@ -689,15 +752,26 @@ function talksHtml(talks) {
     .join("");
 }
 
+let talksDataPromise = null;
+
+function fetchTalks() {
+  if (!talksDataPromise) {
+    talksDataPromise = fetch("/assets/talks.json").then((res) => {
+      if (!res.ok) throw new Error("talks.json");
+      return res.json().then((talks) => {
+        if (!Array.isArray(talks) || !talks.length) throw new Error("empty");
+        return talks;
+      });
+    });
+  }
+  return talksDataPromise;
+}
+
 async function initTalks() {
   const root = document.getElementById("talks-list");
   if (!root) return;
   try {
-    const res = await fetch("/assets/talks.json");
-    if (!res.ok) throw new Error("talks.json");
-    const talks = await res.json();
-    if (!Array.isArray(talks) || !talks.length) throw new Error("empty");
-    root.innerHTML = talksHtml(talks);
+    root.innerHTML = talksHtml(await fetchTalks());
   } catch {
     root.innerHTML = `<p class="status">could not load talks.</p>`;
   }
@@ -725,14 +799,6 @@ function projectItemHtml(project, { featured = false } = {}) {
               <p>${escapeHtml(blurb || "")}</p>
             </a>
           </li>`;
-}
-
-async function fetchProjects() {
-  const res = await fetch("/assets/projects.json");
-  if (!res.ok) throw new Error("projects.json");
-  const projects = await res.json();
-  if (!Array.isArray(projects)) throw new Error("shape");
-  return projects;
 }
 
 async function initProjects() {
@@ -794,6 +860,19 @@ function injectClarity() {
   })(window, document, "clarity", "script", "rb5lzwkxst");
 }
 
+function initPageContent() {
+  const page = document.body.dataset.page;
+  const tasks = [];
+  if (page === "oss") tasks.push(initOpenSource());
+  if (page === "talks") tasks.push(initTalks());
+  if (page === "projects") tasks.push(initProjects());
+  if (page === "work") tasks.push(initExperience());
+  if (page === "home") {
+    tasks.push(initHome(), initWriting(), initHomeProjects());
+  }
+  return Promise.all(tasks);
+}
+
 async function boot() {
   if (!document.getElementById("lg")) {
     document.body.insertAdjacentHTML("afterbegin", LG_FILTER);
@@ -812,33 +891,32 @@ async function boot() {
   setInterval(tickClock, 30000);
   bindKeys();
 
-  try {
-    await loadSiteLinks();
-    renderSiteFooters();
-  } catch {
-    SITE_LINKS = [];
-  }
+  // Page content must not wait on footer links / resume JSON.
+  const pageP = initPageContent();
 
-  try {
-    await loadResumes();
-  } catch {
-    RESUMES = [];
-  }
+  const shellP = Promise.all([
+    loadSiteLinks()
+      .then(() => renderSiteFooters())
+      .catch(() => {
+        SITE_LINKS = [];
+      }),
+    loadResumes().catch(() => {
+      RESUMES = [];
+    }),
+  ]);
+
+  await shellP;
   bindResumeModal();
-
-  if (document.body.dataset.page === "oss") initOpenSource();
-  if (document.body.dataset.page === "talks") initTalks();
-  if (document.body.dataset.page === "projects") initProjects();
-  if (document.body.dataset.page === "work") initExperience();
-  if (document.body.dataset.page === "home") {
-    initHome();
-    initWriting();
-    initHomeProjects();
-  }
   if (document.body.dataset.page === "resume") openResumeModal();
+  await pageP;
 }
 
 injectClarity();
-document.addEventListener("DOMContentLoaded", () => {
+warmPageCaches();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    boot();
+  });
+} else {
   boot();
-});
+}
